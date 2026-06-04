@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+from enum import Enum
 
 app = FastAPI()
 
@@ -9,6 +10,9 @@ next_user_id =1
 fake_consultation_db = []
 next_consultation_id = 1
 
+fake_message_db = []
+next_message_id = 1
+
 class Consultation(BaseModel):
     user_id: int
     keperluan: str
@@ -17,8 +21,22 @@ class User(BaseModel):
     nama: str
     email: str
 
+class ConsultationStatus(Enum):
+    MENUNGGU = "waiting_agent"
+    DIPROSES = "active"
+    SELESAI = "closed"
+
+class SenderEnum(str, Enum):
+    user = "user"
+    agent = "agent"
+
 class ConsultationStatus(BaseModel):
-    status: str
+    status: ConsultationStatus
+
+class Message(BaseModel):
+    consultation_id: int
+    sender: SenderEnum
+    content: str
 
 @app.get("/")
 def home():
@@ -78,7 +96,7 @@ def create_consultation(consultation: Consultation):
         "id": next_consultation_id,
         "user_id": consultation.user_id,
         "keperluan": consultation.keperluan,
-        "status": "menunggu"
+        "status": "waiting_agent"
     }
 
     fake_consultation_db.append(new_consultation)
@@ -100,3 +118,24 @@ def update_consultation_status(
             return consultation
     raise HTTPException(
         status_code=404, detail="Consultation not found")
+
+@app.post("/messages")
+def create_message(message: Message):
+    global next_message_id
+
+    new_message = {
+        "id": next_message_id,
+        "consultation_id": message.consultation_id,
+        "sender": message.sender,
+        "content": message.content
+    }
+
+    fake_message_db.append(new_message)
+    next_message_id += 1
+
+    return new_message
+
+@app.get("/messages")
+def get_messages():
+    return fake_message_db
+
