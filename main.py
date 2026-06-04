@@ -17,6 +17,9 @@ class User(BaseModel):
     nama: str
     email: str
 
+class ConsultationStatus(BaseModel):
+    status: str
+
 @app.get("/")
 def home():
     return {
@@ -86,3 +89,14 @@ def create_consultation(consultation: Consultation):
 @app.get("/consultations")
 def get_consultations():
     return fake_consultation_db
+
+@app.put("/consultations/{consultation_id}/status")
+def update_consultation_status(
+    consultation_id: int, 
+    status_data: ConsultationStatus):
+    for consultation in fake_consultation_db:
+        if consultation["id"] == consultation_id:
+            consultation["status"] = status_data.status
+            return consultation
+    raise HTTPException(
+        status_code=404, detail="Consultation not found")
