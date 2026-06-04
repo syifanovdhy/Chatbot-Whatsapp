@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -56,6 +56,18 @@ def get_user(user_id: int):
 
 @app.post("/consultations")
 def create_consultation(consultation: Consultation):
+
+    user_found = False
+
+    for user in fake_users_db:
+        if user["id"] == consultation.user_id:
+            user_found = True
+            break
+
+    if not user_found:
+        raise HTTPException(
+            status_code=404, 
+            detail="User not found")
 
     global next_consultation_id
 
