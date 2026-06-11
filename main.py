@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from enum import Enum
 from database import engine
-from models import Base
+from models import Base, ConsultationDB
 import os
 from sqlalchemy.orm import session
 from dependencies import get_db
@@ -26,6 +26,12 @@ next_menu_log_id = 1
 class UserCreate(BaseModel):
     nama: str
     email: str
+
+class ConsultationCreate(BaseModel):
+    user_id: int
+    keperluan: str
+
+########
 
 class Consultation(BaseModel):
     user_id: int
@@ -63,6 +69,8 @@ class MenuLog(BaseModel):
     user_id: int
     menu : MenuEnum
 
+## Endpoint ##
+
 @app.get("/debug-db")
 def debug_db():
     return {
@@ -99,6 +107,34 @@ def get_users_db(
     users = db.query(UserDB).all()
     return users
 
+@app.get("/tables-test")
+def tables_test():
+    return {"message": "Tables initialized"}
+
+@app.post("/consultations-db")
+def create_consultation_db(
+    consultation: ConsultationCreate,
+    db: session = Depends(get_db)
+):
+    new_consultation = ConsultationDB(
+        user_id=consultation.user_id,
+        keperluan=consultation.keperluan,
+        status="waiting_agent"
+    )
+    db.add(new_consultation)
+    db.commit()
+    db.refresh(new_consultation)
+    return new_consultation
+
+@app.get("/consultations-db")
+def get_consultations_db(
+    db: session = Depends(get_db)
+):
+    consultations = db.query(ConsultationDB).all()
+    return consultations
+
+# Endpoint  Fake Database #
+
 @app.post("/users")
 def create_user(user: User):
 
@@ -109,7 +145,6 @@ def create_user(user: User):
         "nama": user.nama,
         "email": user.email
     }
-
 
     fake_users_db.append(new_user)
     next_user_id += 1
