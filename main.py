@@ -1,9 +1,12 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from enum import Enum
 from database import engine
 from models import Base
 import os
+from sqlalchemy.orm import session
+from dependencies import get_db
+from models import UserDB
     
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
@@ -19,6 +22,10 @@ next_message_id = 1
 
 fake_menu_logs_db = []
 next_menu_log_id = 1
+
+class UserCreate(BaseModel):
+    nama: str
+    email: str
 
 class Consultation(BaseModel):
     user_id: int
@@ -67,7 +74,30 @@ def home():
     return {
         "message": "PST Bot Running"
     }
-    
+
+@app.post("/users-db")    
+def create_user_db(
+    user: UserCreate, 
+    db: session = Depends(get_db)
+    ):
+
+    new_user = UserDB(
+        nama=user.nama, 
+        email=user.email)
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return {
+        "id": new_user.id,
+        "nama": new_user.nama,
+        "email": new_user.email
+    }
+
+@app.get("/users-db")
+def get_users_db(
+    db: session = Depends(get_db)):
+    users = db.query(UserDB).all()
+    return users
 
 @app.post("/users")
 def create_user(user: User):
