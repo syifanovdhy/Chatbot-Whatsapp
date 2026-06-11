@@ -1,8 +1,12 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from enum import Enum
-
+from database import engine
+from models import Base
+import os
+    
 app = FastAPI()
+Base.metadata.create_all(bind=engine)
 
 fake_users_db = []
 next_user_id =1
@@ -51,6 +55,12 @@ class MenuEnum(str, Enum):
 class MenuLog(BaseModel):
     user_id: int
     menu : MenuEnum
+
+@app.get("/debug-db")
+def debug_db():
+    return {
+        "cwd": os.getcwd()
+    }
 
 @app.get("/")
 def home():
