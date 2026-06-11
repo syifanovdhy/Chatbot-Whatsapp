@@ -192,4 +192,24 @@ def create_menu_log(menu_log: MenuLog):
 def get_menu_logs():
     return fake_menu_logs_db
 
+@app.get("/stats")
+def get_stats ():
+    unique_users = len(fake_users_db)
+    total_consultations = len(fake_consultation_db)
+    total_message = len(fake_message_db)
+    menu_stats = {}
 
+    for log in fake_menu_logs_db:
+        menu=log["menu"]
+
+        if menu not in menu_stats:
+            menu_stats[menu]=0
+
+        menu_stats[menu] +=1
+    
+    return {
+        "unique_users": unique_users,
+        "total_consultations": total_consultations,
+        "total_messages": total_message,
+        "menu_stats": menu_stats
+    }
