@@ -168,6 +168,23 @@ def get_consultation_messages_db(
         MessageDB.consultation_id == consultation_id).all()
     return messages
 
+@app.get("/test-relation/{consultation_id}")
+def test_relation(
+    consultation_id: int, db: 
+    session = Depends(get_db)):
+    
+    consultation = db.query(
+        ConsultationDB
+        ).filter(
+            ConsultationDB.id == consultation_id
+            ).first()
+    if not consultation:
+        raise HTTPException(status_code=404, detail="Consultation not found")
+    return {
+        "consultation.id": consultation.id,
+        "jumlah_pesan": len(consultation.messages)
+    }
+
 # Endpoint  Fake Database #
 
 @app.post("/users")

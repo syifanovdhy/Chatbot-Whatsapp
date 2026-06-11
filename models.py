@@ -1,6 +1,5 @@
-from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy import Integer, String
-from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import ForeignKey
 
 class Base(DeclarativeBase):
@@ -11,13 +10,16 @@ class UserDB(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     nama: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(100))
+    consultations: Mapped[list["ConsultationDB"]] = relationship(back_populates="user")
 
 class ConsultationDB(Base):
     __tablename__ = "consultations"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     keperluan: Mapped[str] = mapped_column(String(200))
+    user: Mapped["UserDB"] = relationship(back_populates="consultations")
     status: Mapped[str] = mapped_column(String(50))
+    messages: Mapped[list["MessageDB"]] = relationship(back_populates="consultation")
 
 class MessageDB(Base) :    
     __tablename__ = "messages"
@@ -25,3 +27,4 @@ class MessageDB(Base) :
     consultation_id: Mapped[int] = mapped_column(ForeignKey("consultations.id"))
     sender: Mapped[str] = mapped_column(String(50))
     content: Mapped[str] = mapped_column(String(200))
+    consultation : Mapped["ConsultationDB"] = relationship(back_populates="messages")
