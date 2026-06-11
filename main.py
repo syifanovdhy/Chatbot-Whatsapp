@@ -13,6 +13,9 @@ next_consultation_id = 1
 fake_message_db = []
 next_message_id = 1
 
+fake_menu_logs_db = []
+next_menu_log_id = 1
+
 class Consultation(BaseModel):
     user_id: int
     keperluan: str
@@ -37,6 +40,17 @@ class Message(BaseModel):
     consultation_id: int
     sender: SenderEnum
     content: str
+
+class MenuEnum(str, Enum):
+    perpustakaan = "perpustakaan"
+    konsultasi = "konsultasi"
+    silastik = "silastik"
+    romantik = "romantik"
+    pengaduan = "pengaduan"
+
+class MenuLog(BaseModel):
+    user_id: int
+    menu : MenuEnum
 
 @app.get("/")
 def home():
@@ -147,4 +161,35 @@ def get_consultation_messages(consultation_id: int):
         if message["consultation_id"] == consultation_id:
             consultation_messages.append(message)
     return consultation_messages
+
+@app.post("/menu-logs")
+def create_menu_log(menu_log: MenuLog):
+    user_found = False
+
+    for user in fake_users_db:
+        if user["id"] == menu_log.user_id:
+            user_found = True
+            break
+
+    if not user_found:
+        raise HTTPException(
+            status_code=404, 
+            detail="User not found")
+    
+    global next_menu_log_id
+
+    new_log = {
+        "id": next_menu_log_id,
+        "user_id": menu_log.user_id,
+        "menu": menu_log.menu
+    }
+
+    fake_menu_logs_db.append(new_log)
+    next_menu_log_id +=1
+    return new_log
+
+@app.get("/menu-logs")
+def get_menu_logs():
+    return fake_menu_logs_db
+
 
