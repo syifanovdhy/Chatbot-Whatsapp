@@ -2,11 +2,10 @@ from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from enum import Enum
 from database import engine
-from models import Base, ConsultationDB
+from models import Base, UserDB, ConsultationDB, MessageDB
 import os
 from sqlalchemy.orm import session
 from dependencies import get_db
-from models import UserDB
     
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
@@ -30,6 +29,11 @@ class UserCreate(BaseModel):
 class ConsultationCreate(BaseModel):
     user_id: int
     keperluan: str
+
+class MessageCreate(BaseModel):
+    consultation_id: int
+    sender: str
+    content: str
 
 ########
 
@@ -132,6 +136,37 @@ def get_consultations_db(
 ):
     consultations = db.query(ConsultationDB).all()
     return consultations
+
+@app.post("/messages-db")
+def create_message_db(
+    message: MessageCreate,
+    db: session = Depends(get_db)
+):
+    new_message = MessageDB(
+        consultation_id=message.consultation_id,
+        sender=message.sender,
+        content=message.content
+    )
+    db.add(new_message)
+    db.commit()
+    db.refresh(new_message)
+    return new_message
+
+@app.get("/messages-db")
+def get_messages_db(
+    db: session = Depends(get_db)
+):
+    messages = db.query(MessageDB).all()
+    return messages
+
+@app.get("/consultations-db/{consultation_id}/messages")
+def get_consultation_messages_db(
+    consultation_id: int,
+    db: session = Depends(get_db)
+):
+    messages = db.query(MessageDB).filter(
+        MessageDB.consultation_id == consultation_id).all()
+    return messages
 
 # Endpoint  Fake Database #
 

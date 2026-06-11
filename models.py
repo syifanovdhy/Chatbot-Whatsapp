@@ -19,4 +19,9 @@ class ConsultationDB(Base):
     keperluan: Mapped[str] = mapped_column(String(200))
     status: Mapped[str] = mapped_column(String(50))
 
-    
+class MessageDB(Base) :    
+    __tablename__ = "messages"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    consultation_id: Mapped[int] = mapped_column(ForeignKey("consultations.id"))
+    sender: Mapped[str] = mapped_column(String(50))
+    content: Mapped[str] = mapped_column(String(200))
