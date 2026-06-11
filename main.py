@@ -139,3 +139,12 @@ def create_message(message: Message):
 def get_messages():
     return fake_message_db
 
+@app.get("/consultations/{consultation_id}/messages")
+def get_consultation_messages(consultation_id: int):
+    
+    consultation_messages = []
+    for message in fake_message_db:
+        if message["consultation_id"] == consultation_id:
+            consultation_messages.append(message)
+    return consultation_messages
+
