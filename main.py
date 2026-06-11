@@ -6,8 +6,10 @@ from models import Base, UserDB, ConsultationDB, MessageDB
 import os
 from sqlalchemy.orm import session
 from dependencies import get_db
+from routers.user import router as user_router
     
 app = FastAPI()
+app.include_router(user_router)
 Base.metadata.create_all(bind=engine)
 
 fake_users_db = []
