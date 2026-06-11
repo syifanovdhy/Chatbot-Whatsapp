@@ -8,10 +8,12 @@ from sqlalchemy.orm import session
 from dependencies import get_db
 from routers.user import router as user_router
 from routers.consultation import router as consultation_router
+from routers.message import router as message_router
     
 app = FastAPI()
 app.include_router(user_router)
 app.include_router(consultation_router)
+app.include_router(message_router)
 Base.metadata.create_all(bind=engine)
 
 fake_users_db = []
