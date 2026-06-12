@@ -1,0 +1,8 @@
+from enum import Enum
+
+class MenuType(str, Enum):
+    PERPUSTAKAAN = "PERPUSTAKAAN"
+    KONSULTASI = "KONSULTASI"
+    SILASTIK = "SILASTIK"
+    ROMANTIK = "ROMANTIK"
+    PENGADUAN = "PENGADUAN"

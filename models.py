@@ -1,6 +1,6 @@
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-from sqlalchemy import Integer, String
-from sqlalchemy import ForeignKey
+from sqlalchemy import Integer, String, ForeignKey, DateTime
+from datetime import datetime
 
 class Base(DeclarativeBase):
     pass
@@ -11,6 +11,7 @@ class UserDB(Base):
     nama: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(100))
     consultations: Mapped[list["ConsultationDB"]] = relationship(back_populates="user")
+    menu_logs: Mapped[list["MenuLogDB"]] = relationship(back_populates="user")
 
 class ConsultationDB(Base):
     __tablename__ = "consultations"
@@ -28,3 +29,11 @@ class MessageDB(Base) :
     sender: Mapped[str] = mapped_column(String(50))
     content: Mapped[str] = mapped_column(String(200))
     consultation : Mapped["ConsultationDB"] = relationship(back_populates="messages")
+
+class MenuLogDB(Base):
+    __tablename__ = "menu_logs"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    menu_type: Mapped[str] = mapped_column(String(50))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    user: Mapped["UserDB"] = relationship(back_populates="menu_logs")
