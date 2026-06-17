@@ -12,6 +12,7 @@ class UserDB(Base):
     email: Mapped[str] = mapped_column(String(100))
     consultations: Mapped[list["ConsultationDB"]] = relationship(back_populates="user")
     menu_logs: Mapped[list["MenuLogDB"]] = relationship(back_populates="user")
+    status: Mapped[str] = mapped_column(String(20), default="BOT_MODE")
 
 class ConsultationDB(Base):
     __tablename__ = "consultations"

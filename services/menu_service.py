@@ -23,7 +23,7 @@ def process_menu_choice(choice: str):
 
         Silakan kunjungi:
 
-        https://banggaikepulauankab.bps.go.id
+        https://bangkepkab.bps.go.id
 
         Ketik 0 untuk kembali ke menu utama.
         """
@@ -73,4 +73,15 @@ def process_menu_choice(choice: str):
     Menu tidak tersedia.
 
     Ketik 0 untuk melihat menu utama.
-    """                         
+    """   
+
+MENU_MAPPING = {
+    "1": "PERPUSTAKAAN",
+    "2": "KONSULTASI",
+    "3": "SILASTIK",
+    "4": "ROMANTIK",
+    "5": "PENGADUAN"
+}
+
+def get_menu_name(choice: str):
+    return MENU_MAPPING.get(choice)
