@@ -22,6 +22,9 @@ class ConsultationDB(Base):
     user: Mapped["UserDB"] = relationship(back_populates="consultations")
     status: Mapped[str] = mapped_column(String(50))
     messages: Mapped[list["MessageDB"]] = relationship(back_populates="consultation")
+    started_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    agent_replied: Mapped[bool] = mapped_column(default=False)
+    timeout_sent : Mapped[bool] = mapped_column(default=False)
 
 class MessageDB(Base) :    
     __tablename__ = "messages"

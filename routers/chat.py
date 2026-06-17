@@ -1,9 +1,10 @@
 from pydantic import BaseModel
 from fastapi import APIRouter, Depends
 from dependencies import get_db
-from models import MenuLogDB, UserDB
+from models import MenuLogDB, UserDB, ConsultationDB
 from sqlalchemy.orm import Session
 from services.menu_service import process_menu_choice, get_menu_name
+
 
 router = APIRouter()
 
@@ -29,6 +30,17 @@ def chat(
     UserDB,
     request.user_id
 )
+    if request.message == "2":
+
+        consultation = ConsultationDB(
+            user_id=request.user_id,
+            keperluan="Menunggu deskripsi",
+            status="waiting_agent"
+        )
+
+        db.add(consultation)
+        db.commit()
+
     reply = process_menu_choice(request.message)
 
     return {
