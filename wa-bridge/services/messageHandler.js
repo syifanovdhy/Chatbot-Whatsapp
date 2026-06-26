@@ -21,7 +21,6 @@ function registerMessageHandler(client) {
         console.log("Isi  :", message.body);
 
         const response = await sendMessageToBackend({
-            user_id: 1,
             message: message.body
         });
 

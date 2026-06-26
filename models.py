@@ -10,10 +10,11 @@ class UserDB(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     nama: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(100))
-    consultations: Mapped[list["ConsultationDB"]] = relationship(back_populates="user")
-    menu_logs: Mapped[list["MenuLogDB"]] = relationship(back_populates="user")
+    consultations: Mapped[list["ConsultationDB"]] = relationship(back_populates="user", cascade="all, delete-orphan")
+    menu_logs: Mapped[list["MenuLogDB"]] = relationship(back_populates="user", cascade="all, delete-orphan")
     status: Mapped[str] = mapped_column(String(20), default="BOT_MODE")
-    whatsapp_accounts: Mapped[list["WhatsAppUserDB"]] = relationship(back_populates="user")
+    whatsapp_accounts: Mapped[list["WhatsAppUserDB"]] = relationship(back_populates="user", cascade="all, delete-orphan")
+    registration_step: Mapped[str] = mapped_column(String(30),default="ASK_NAME")
 
 class ConsultationDB(Base):
     __tablename__ = "consultations"
@@ -50,4 +51,5 @@ class WhatsAppUserDB(Base):
     user_id : Mapped[int] = mapped_column(ForeignKey("users.id"))
     push_name: Mapped[str] = mapped_column(String(100))
     user: Mapped["UserDB"] = relationship(back_populates="whatsapp_accounts")
+    registered_at: Mapped[datetime] = mapped_column(DateTime,default=datetime.utcnow)
 
