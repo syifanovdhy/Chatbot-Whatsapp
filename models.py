@@ -41,3 +41,12 @@ class MenuLogDB(Base):
     menu_type: Mapped[str] = mapped_column(String(50))
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     user: Mapped["UserDB"] = relationship(back_populates="menu_logs")
+
+class WhatsAppUserDB(Base):
+    __tablename__ = "whatsapp_users"
+    id : Mapped[int] = mapped_column(Integer, primary_key=True)
+    wa_id : Mapped[str] = mapped_column(String(100), unique=True)
+    user_id : Mapped[int] = mapped_column(ForeignKey("users.id"))
+    push_name: Mapped[str] = mapped_column(String(100))
+    user: Mapped["UserDB"] = relationship()
+
