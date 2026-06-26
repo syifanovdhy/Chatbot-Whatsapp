@@ -1,2 +1,3 @@
-2026/06/26-10:14:00.818 44a8 Creating DB E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\Sync Data\LevelDB since it was missing.
-2026/06/26-10:14:00.833 44a8 Reusing MANIFEST E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\Sync Data\LevelDB/MANIFEST-000001
+2026/06/26-14:02:19.458 6690 Reusing MANIFEST E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\Sync Data\LevelDB/MANIFEST-000001
+2026/06/26-14:02:19.460 6690 Recovering log #3
+2026/06/26-14:02:19.460 6690 Reusing old log E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\Sync Data\LevelDB/000003.log 

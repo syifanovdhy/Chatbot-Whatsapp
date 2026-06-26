@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends
 from dependencies import get_db
 from models import MenuLogDB, UserDB, ConsultationDB
 from sqlalchemy.orm import Session
+from routers import user
 from services.menu_service import process_menu_choice, get_menu_name
 
 
@@ -30,6 +31,11 @@ def chat(
     UserDB,
     request.user_id
 )
+    if not user:
+        return {
+            "reply": "User tidak ditemukan."
+        }
+    
     if request.message == "2":
 
         consultation = ConsultationDB(
