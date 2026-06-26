@@ -13,6 +13,7 @@ class UserDB(Base):
     consultations: Mapped[list["ConsultationDB"]] = relationship(back_populates="user")
     menu_logs: Mapped[list["MenuLogDB"]] = relationship(back_populates="user")
     status: Mapped[str] = mapped_column(String(20), default="BOT_MODE")
+    whatsapp_accounts: Mapped[list["WhatsAppUserDB"]] = relationship(back_populates="user")
 
 class ConsultationDB(Base):
     __tablename__ = "consultations"
@@ -48,5 +49,5 @@ class WhatsAppUserDB(Base):
     wa_id : Mapped[str] = mapped_column(String(100), unique=True)
     user_id : Mapped[int] = mapped_column(ForeignKey("users.id"))
     push_name: Mapped[str] = mapped_column(String(100))
-    user: Mapped["UserDB"] = relationship()
+    user: Mapped["UserDB"] = relationship(back_populates="whatsapp_accounts")
 
