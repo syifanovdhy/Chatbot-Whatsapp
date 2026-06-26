@@ -20,7 +20,11 @@ function registerMessageHandler(client) {
         console.log("Dari :", message.from);
         console.log("Isi  :", message.body);
 
+        const contact = await message.getContact();
+
         const response = await sendMessageToBackend({
+            wa_id: message.from,
+            push_name: contact.pushname || "",
             message: message.body
         });
 

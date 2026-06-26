@@ -5,23 +5,30 @@ from models import MenuLogDB, UserDB, ConsultationDB
 from sqlalchemy.orm import Session
 from routers import user
 from services.menu_service import process_menu_choice, get_menu_name
+from services.whatsapp_user_service import get_or_create_user
 
 
 router = APIRouter()
 
 class ChatRequest(BaseModel):
     message: str
-    user_id: int
+    wa_id: str
+    push_name: str = ""
 
 @router.post("/chat")
 def chat(
     request: ChatRequest, 
     db: Session = Depends(get_db)
 ):
+    user = get_or_create_user(
+    db=db,
+    wa_id=request.wa_id,
+    push_name=request.push_name
+)
     menu_name = get_menu_name(request.message)
     if menu_name:
         log = MenuLogDB(
-            user_id=request.user_id,
+            user_id=user.id,
             menu=menu_name
         )
         db.add(log)
@@ -29,7 +36,7 @@ def chat(
 
     user = db.get(
     UserDB,
-    request.user_id
+    user.id
 )
     if not user:
         return {
@@ -39,7 +46,7 @@ def chat(
     if request.message == "2":
 
         consultation = ConsultationDB(
-            user_id=request.user_id,
+            user_id=user.id,
             keperluan="Menunggu deskripsi",
             status="waiting_agent"
         )
