@@ -1,12 +1,35 @@
-2026/06/26-16:12:04.612 7a60 Reusing MANIFEST E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2026/06/26-16:12:04.612 7a60 Recovering log #19
-2026/06/26-16:12:04.634 7a60 Reusing old log E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000019.log 
-2026/06/26-16:12:12.430 7a60 Level-0 table #24: started
-2026/06/26-16:12:12.445 7a60 Level-0 table #24: 1346079 bytes OK
-2026/06/26-16:12:12.446 7a60 Delete type=0 #19
-2026/06/26-16:12:18.294 6220 Compacting 1@1 + 1@2 files
-2026/06/26-16:12:18.340 6220 Generated table #25@1: 42004 keys, 2134063 bytes
-2026/06/26-16:12:18.340 6220 Compacted 1@1 + 1@2 files => 2134063 bytes
-2026/06/26-16:12:18.340 6220 compacted to: files[ 0 0 1 0 0 0 0 ]
-2026/06/26-16:12:18.341 6220 Delete type=2 #21
-2026/06/26-16:12:18.341 6220 Delete type=2 #24
+2026/06/29-12:56:59.685 53c4 Reusing MANIFEST E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/06/29-12:56:59.691 53c4 Recovering log #23
+2026/06/29-12:56:59.695 53c4 Reusing old log E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000023.log 
+2026/06/29-12:57:27.203 53c4 Level-0 table #28: started
+2026/06/29-12:57:27.215 53c4 Level-0 table #28: 1049411 bytes OK
+2026/06/29-12:57:27.215 53c4 Delete type=0 #23
+2026/06/29-12:57:27.217 53c4 Compacting 1@1 + 1@2 files
+2026/06/29-12:57:27.260 53c4 Generated table #29@1: 44385 keys, 2246793 bytes
+2026/06/29-12:57:27.264 53c4 Generated table #30@1: 1774 keys, 96014 bytes
+2026/06/29-12:57:27.265 53c4 Compacted 1@1 + 1@2 files => 2342807 bytes
+2026/06/29-12:57:27.265 53c4 compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/06/29-12:57:49.738 53c4 Level-0 table #32: started
+2026/06/29-12:57:49.751 53c4 Level-0 table #32: 1199523 bytes OK
+2026/06/29-12:57:49.752 53c4 Delete type=2 #25
+2026/06/29-12:57:49.752 53c4 Delete type=0 #27
+2026/06/29-12:57:49.752 53c4 Delete type=2 #28
+2026/06/29-12:57:49.754 53c4 Compacting 1@1 + 2@2 files
+2026/06/29-12:57:49.796 53c4 Generated table #33@1: 43638 keys, 2269764 bytes
+2026/06/29-12:57:49.800 53c4 Generated table #34@1: 5147 keys, 234368 bytes
+2026/06/29-12:57:49.800 53c4 Compacted 1@1 + 2@2 files => 2504132 bytes
+2026/06/29-12:57:49.801 53c4 compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/06/29-12:57:49.801 53c4 Delete type=2 #29
+2026/06/29-12:57:49.801 53c4 Delete type=2 #30
+2026/06/29-12:57:49.801 53c4 Delete type=2 #32
+2026/06/29-12:58:11.504 53c4 Level-0 table #36: started
+2026/06/29-12:58:11.517 53c4 Level-0 table #36: 1129375 bytes OK
+2026/06/29-12:58:11.518 53c4 Delete type=0 #31
+2026/06/29-12:58:11.519 53c4 Compacting 1@1 + 2@2 files
+2026/06/29-12:58:11.552 53c4 Generated table #37@1: 44612 keys, 2249956 bytes
+2026/06/29-12:58:11.558 53c4 Generated table #38@1: 7718 keys, 421988 bytes
+2026/06/29-12:58:11.558 53c4 Compacted 1@1 + 2@2 files => 2671944 bytes
+2026/06/29-12:58:11.558 53c4 compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/06/29-12:58:11.558 53c4 Delete type=2 #33
+2026/06/29-12:58:11.559 53c4 Delete type=2 #34
+2026/06/29-12:58:11.559 53c4 Delete type=2 #36

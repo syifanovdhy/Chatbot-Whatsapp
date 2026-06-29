@@ -10,6 +10,7 @@ class UserDB(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     nama: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(100))
+    instansi: Mapped[str] = mapped_column(String(200),default="")
     consultations: Mapped[list["ConsultationDB"]] = relationship(back_populates="user", cascade="all, delete-orphan")
     menu_logs: Mapped[list["MenuLogDB"]] = relationship(back_populates="user", cascade="all, delete-orphan")
     status: Mapped[str] = mapped_column(String(20), default="BOT_MODE")

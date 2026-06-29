@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from routers import user
 from services.menu_service import process_menu_choice, get_menu_name
 from services.whatsapp_user_service import get_or_create_user
-
+from services.registration_service import process_registration
 
 router = APIRouter()
 
@@ -25,6 +25,29 @@ def chat(
     wa_id=request.wa_id,
     push_name=request.push_name
 )
+    if user.registration_step == "ASK_NAME":
+
+        if request.message.lower() in ["halo", "hai", "hi", "assalamualaikum"]:
+
+            return {
+                "reply":
+                (
+                    "👋 Selamat datang di Pelayanan Statistik Terpadu BPS Kabupaten Banggai Kepulauan.\n\n"
+                    "Perkenalkan, saya PST Bot yang akan membantu Anda.\n\n"
+                    "Sebelum menggunakan layanan, boleh ketik *nama lengkap* Anda?"
+                )
+            }
+
+        reply = process_registration(
+            db=db,
+            user=user,
+            message=request.message
+        )
+
+        return {
+            "reply": reply
+        }
+
     menu_name = get_menu_name(request.message)
     if menu_name:
         log = MenuLogDB(

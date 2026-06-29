@@ -1,3 +1,6 @@
-2026/06/26-16:12:04.176 657c Reusing MANIFEST E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\Local Storage\leveldb/MANIFEST-000001
-2026/06/26-16:12:04.187 657c Recovering log #4
-2026/06/26-16:12:04.188 657c Reusing old log E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\Local Storage\leveldb/000004.log 
+2026/06/29-12:56:55.299 3920 Reusing MANIFEST E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\Local Storage\leveldb/MANIFEST-000001
+2026/06/29-12:56:55.315 3920 Recovering log #4
+2026/06/29-12:56:55.316 3920 Reusing old log E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\Local Storage\leveldb/000004.log 
+2026/06/29-13:47:09.062 2da4 Level-0 table #8: started
+2026/06/29-13:47:09.067 2da4 Level-0 table #8: 11930 bytes OK
+2026/06/29-13:47:09.068 2da4 Delete type=0 #4
