@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-
 from models import UserDB
 
 
@@ -28,6 +27,20 @@ def process_registration(
         return (
             f"Terima kasih, Kak {first_name} 😊\n\n"
             "Sekarang boleh tahu berasal dari instansi mana?"
+        )
+    
+    if user.registration_step == "ASK_INSTITUTION":
+
+        user.instansi = message.strip()
+
+        user.registration_step = "ASK_EMAIL"
+
+        db.commit()
+
+        return (
+            "Terima kasih 😊\n\n"
+            "Sekarang silakan masukkan alamat email.\n\n"
+            "Jika tidak ingin mengisi, ketik tanda -"
         )
 
     return None

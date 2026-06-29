@@ -3,7 +3,6 @@ from fastapi import APIRouter, Depends
 from dependencies import get_db
 from models import MenuLogDB, UserDB, ConsultationDB
 from sqlalchemy.orm import Session
-from routers import user
 from services.menu_service import process_menu_choice, get_menu_name
 from services.whatsapp_user_service import get_or_create_user
 from services.registration_service import process_registration
@@ -25,9 +24,16 @@ def chat(
     wa_id=request.wa_id,
     push_name=request.push_name
 )
-    if user.registration_step == "ASK_NAME":
+    if user.registration_step in [
+    "ASK_NAME",
+    "ASK_INSTITUTION"
+    ]:
 
-        if request.message.lower() in ["halo", "hai", "hi", "assalamualaikum"]:
+        if (
+            user.registration_step == "ASK_NAME"
+            and request.message.lower()
+            in ["halo", "hai", "hi", "assalamualaikum"]
+        ):
 
             return {
                 "reply":
@@ -56,15 +62,6 @@ def chat(
         )
         db.add(log)
         db.commit()
-
-    user = db.get(
-    UserDB,
-    user.id
-)
-    if not user:
-        return {
-            "reply": "User tidak ditemukan."
-        }
     
     if request.message == "2":
 
