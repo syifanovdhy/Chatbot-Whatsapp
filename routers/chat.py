@@ -26,7 +26,8 @@ def chat(
 )
     if user.registration_step in [
     "ASK_NAME",
-    "ASK_INSTITUTION"
+    "ASK_INSTITUTION",
+    "ASK_EMAIL"
     ]:
 
         if (

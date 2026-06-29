@@ -42,5 +42,28 @@ def process_registration(
             "Sekarang silakan masukkan alamat email.\n\n"
             "Jika tidak ingin mengisi, ketik tanda -"
         )
+    
+    if user.registration_step == "ASK_EMAIL":
+
+        if message.strip() == "-":
+            user.email = ""
+        else:
+            user.email = message.strip()
+
+        user.registration_step = "MAIN_MENU"
+
+        db.commit()
+
+        first_name = user.nama.split()[0]
+
+        return (
+            f"Registrasi selesai, Kak {first_name}! 🎉\n\n"
+            "Silakan pilih layanan berikut:\n\n"
+            "1. Perpustakaan\n"
+            "2. Konsultasi Statistik\n"
+            "3. Penjualan Produk Statistik (Silastik)\n"
+            "4. Rekomendasi Statistik (Romantik)\n"
+            "5. Pengaduan\n"
+        )
 
     return None
