@@ -5,7 +5,8 @@ from models import MenuLogDB, UserDB, ConsultationDB
 from sqlalchemy.orm import Session
 from services.menu_service import process_menu_choice, get_menu_name
 from services.whatsapp_user_service import get_or_create_user
-from services.registration_service import process_registration
+# from services.registration_service import process_registration
+from services.registration_service import parse_registration
 
 router = APIRouter()
 
@@ -25,36 +26,31 @@ def chat(
     push_name=request.push_name
 )
     if user.registration_step in [
-    "ASK_NAME",
-    "ASK_INSTITUTION",
-    "ASK_EMAIL"
+    "ASK_REGISTRATION"
     ]:
 
-        if (
-            user.registration_step == "ASK_NAME"
-            and request.message.lower()
-            in ["halo", "hai", "hi", "assalamualaikum"]
-        ):
-
+        if request.message.lower() in [
+            "halo",
+            "hai",
+            "hi",
+            "assalamualaikum"
+        ]:
             return {
                 "reply":
                 (
-                    "👋 Selamat datang di Pelayanan Statistik Terpadu BPS Kabupaten Banggai Kepulauan.\n\n"
-                    "Perkenalkan, saya PST Bot yang akan membantu Anda.\n\n"
-                    "Sebelum menggunakan layanan, boleh ketik *nama lengkap* Anda?"
+                    "👋 Selamat datang di Pelayanan Statistik Terpadu (PST)\n"
+                    "BPS Kabupaten Banggai Kepulauan.\n\n"
+                    "Sebelum menggunakan layanan, mohon lengkapi data berikut dalam *satu pesan*:\n\n"
+                    "Nama:\n"
+                    "Instansi:\n"
+                    "Email: (boleh diisi '-' jika tidak ada)\n\n"
+                    "Contoh:\n"
+                    "Nama: Syifa Novdhy\n"
+                    "Instansi: Universitas Hasanuddin\n"
+                    "Email: -"
                 )
             }
-
-        reply = process_registration(
-            db=db,
-            user=user,
-            message=request.message
-        )
-
-        return {
-            "reply": reply
-        }
-
+        
     menu_name = get_menu_name(request.message)
     if menu_name:
         log = MenuLogDB(
@@ -80,3 +76,8 @@ def chat(
     return {
         "reply": reply
     }
+
+@router.post("/test-parser")
+def test_parser(request: ChatRequest):
+
+    return parse_registration(request.message)

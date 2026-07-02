@@ -1,3 +1,14 @@
-2026/06/29-17:16:41.104 6630 Reusing MANIFEST E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2026/06/29-17:16:41.104 6630 Recovering log #35
-2026/06/29-17:16:41.118 6630 Reusing old log E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000035.log 
+2026/06/29-17:19:39.449 6324 Reusing MANIFEST E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/06/29-17:19:39.449 6324 Recovering log #35
+2026/06/29-17:19:39.469 6324 Reusing old log E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000035.log 
+2026/06/29-17:20:08.107 830 Level-0 table #41: started
+2026/06/29-17:20:08.123 830 Level-0 table #41: 1246957 bytes OK
+2026/06/29-17:20:08.124 830 Delete type=0 #35
+2026/06/29-17:20:08.452 6664 Compacting 1@1 + 2@2 files
+2026/06/29-17:20:08.487 6664 Generated table #42@1: 43948 keys, 2255244 bytes
+2026/06/29-17:20:08.492 6664 Generated table #43@1: 6275 keys, 317755 bytes
+2026/06/29-17:20:08.492 6664 Compacted 1@1 + 2@2 files => 2572999 bytes
+2026/06/29-17:20:08.492 6664 compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/06/29-17:20:08.492 6664 Delete type=2 #37
+2026/06/29-17:20:08.492 6664 Delete type=2 #38
+2026/06/29-17:20:08.492 6664 Delete type=2 #41

@@ -1,69 +1,31 @@
-from sqlalchemy.orm import Session
-from models import UserDB
+import re
 
+def parse_registration(message: str):
 
-def process_registration(
-    db: Session,
-    user: UserDB,
-    message: str
-):
-    """
-    Mengolah proses registrasi pengguna.
-    Return:
-        - None jika registrasi belum selesai
-        - String balasan chatbot
-    """
+    nama = None
+    instansi = None
+    email = None
 
-    if user.registration_step == "ASK_NAME":
+    lines = message.splitlines()
 
-        user.nama = message.strip()
+    for line in lines:
 
-        user.registration_step = "ASK_INSTITUTION"
+        line = line.strip()
 
-        db.commit()
+        if line.lower().startswith("nama:"):
+            nama = line.split(":", 1)[1].strip()
 
-        first_name = user.nama.split()[0]
+        elif line.lower().startswith("instansi:"):
+            instansi = line.split(":", 1)[1].strip()
 
-        return (
-            f"Terima kasih, Kak {first_name} 😊\n\n"
-            "Sekarang boleh tahu berasal dari instansi mana?"
-        )
-    
-    if user.registration_step == "ASK_INSTITUTION":
+        elif line.lower().startswith("email:"):
+            email = line.split(":", 1)[1].strip()
 
-        user.instansi = message.strip()
+    if not nama or not instansi or email is None:
+        return None
 
-        user.registration_step = "ASK_EMAIL"
-
-        db.commit()
-
-        return (
-            "Terima kasih 😊\n\n"
-            "Sekarang silakan masukkan alamat email.\n\n"
-            "Jika tidak ingin mengisi, ketik tanda -"
-        )
-    
-    if user.registration_step == "ASK_EMAIL":
-
-        if message.strip() == "-":
-            user.email = ""
-        else:
-            user.email = message.strip()
-
-        user.registration_step = "MAIN_MENU"
-
-        db.commit()
-
-        first_name = user.nama.split()[0]
-
-        return (
-            f"Registrasi selesai, Kak {first_name}! 🎉\n\n"
-            "Silakan pilih layanan berikut:\n\n"
-            "1. Perpustakaan\n"
-            "2. Konsultasi Statistik\n"
-            "3. Penjualan Produk Statistik (Silastik)\n"
-            "4. Rekomendasi Statistik (Romantik)\n"
-            "5. Pengaduan\n"
-        )
-
-    return None
+    return {
+        "nama": nama,
+        "instansi": instansi,
+        "email": email
+    }
