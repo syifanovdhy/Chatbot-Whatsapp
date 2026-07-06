@@ -1,16 +1,14 @@
 def get_main_menu():
     return """
-    Selamat datang di Pelayanan Statistik Terpadu BPS.
+    📋 *Silakan pilih layanan yang tersedia*
 
-    Pilih layanan:
+    1️⃣ Perpustakaan
+    2️⃣ Konsultasi
+    3️⃣ Silastik
+    4️⃣ Romantik
+    5️⃣ Pengaduan
 
-    1. Perpustakaan
-    2. Konsultasi Statistik
-    3. Penjualan Produk Statistik (Silastik)
-    4. Rekomendasi Statistik (Romantik)
-    5. Pengaduan
-
-    Ketik angka menu yang dipilih.
+    Balas dengan angka 1-5.
     """
 
 def process_menu_choice(choice: str):
