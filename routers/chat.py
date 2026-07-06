@@ -1,14 +1,7 @@
-from urllib import request
-
 from pydantic import BaseModel
 from fastapi import APIRouter, Depends
 from dependencies import get_db
-# from models import MenuLogDB, UserDB, ConsultationDB
 from sqlalchemy.orm import Session
-# from services.menu_service import get_main_menu, process_menu_choice, get_menu_name
-# from services.whatsapp_user_service import get_or_create_user
-# from services.registration_service import process_registration
-# from services.registration_service import TEMPLATE_REGISTRASI, parse_registration, save_registration
 from services.chat_service import process_chat
 
 router = APIRouter()
@@ -34,3 +27,8 @@ def chat(
     return {
         "reply": reply
     }
+
+# @router.post("/test-parser")
+# def test_parser(request: ChatRequest):
+
+#     return parse_registration(request.message)
