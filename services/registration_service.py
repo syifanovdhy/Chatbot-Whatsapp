@@ -65,3 +65,31 @@ def save_registration(
     user.registration_step = "MAIN_MENU"
 
     db.commit()
+
+def handle_registration(
+    db: Session,
+    user: UserDB,
+    message: str
+):
+
+    if user.registration_step != "ASK_REGISTRATION":
+        return None
+
+    data = parse_registration(message)
+
+    if data is None:
+        return TEMPLATE_REGISTRASI
+
+    save_registration(
+        db=db,
+        user=user,
+        data=data
+    )
+
+    first_name = user.nama.split()[0]
+
+    return (
+        f"Terima kasih, Kak {first_name} 😊\n\n"
+        "Registrasi berhasil.\n\n"
+        + get_main_menu()
+    )

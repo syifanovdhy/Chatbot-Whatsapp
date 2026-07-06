@@ -22,7 +22,7 @@ def get_or_create_user(
         nama="",
         email="",
         status="BOT_MODE",
-        registration_step="ASK_NAME"
+        registration_step="ASK_REGISTRATION"
     )
 
     db.add(new_user)

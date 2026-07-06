@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from routers import message
 from services.whatsapp_user_service import get_or_create_user
 
 def process_chat(
@@ -14,9 +15,11 @@ def process_chat(
     )
 
     print("=================================")
-    print("User :", user.nama)
-    print("Step :", user.registration_step)
-    print("Message :", message)
+    print("User ID   :", user.id)
+    print("WA Name   :", user.whatsapp_accounts[0].push_name)
+    print("Nama PST  :", user.nama)
+    print("Step      :", user.registration_step)
+    print("Message   :", message)
     print("=================================")
 
     return "Belum diimplementasikan."
