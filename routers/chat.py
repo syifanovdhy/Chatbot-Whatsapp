@@ -3,6 +3,8 @@ from fastapi import APIRouter, Depends
 from dependencies import get_db
 from sqlalchemy.orm import Session
 from services.chat_service import process_chat
+from services.registration_service import parse_registration
+
 
 router = APIRouter()
 
@@ -28,7 +30,7 @@ def chat(
         "reply": reply
     }
 
-# @router.post("/test-parser")
-# def test_parser(request: ChatRequest):
+@router.post("/test-parser")
+def test_parser(request: ChatRequest):
 
-#     return parse_registration(request.message)
+    return parse_registration(request.message)

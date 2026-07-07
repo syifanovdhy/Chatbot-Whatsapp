@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from routers import message
 from services.whatsapp_user_service import get_or_create_user
+from services.registration_service import handle_registration
 
 def process_chat(
     db: Session,
@@ -21,5 +21,14 @@ def process_chat(
     print("Step      :", user.registration_step)
     print("Message   :", message)
     print("=================================")
+
+    reply = handle_registration(
+        db=db,
+        user=user,
+        message=message
+    )
+
+    if reply:
+        return reply
 
     return "Belum diimplementasikan."

@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from models import UserDB
+from services.menu_service import get_main_menu
 
 TEMPLATE_REGISTRASI = (
     "👋 Selamat datang di Pelayanan Statistik Terpadu (PST)\n"
@@ -29,14 +30,22 @@ def parse_registration(message: str):
 
         line = line.strip()
 
-        if line.lower().startswith("nama:"):
-            nama = line.split(":", 1)[1].strip()
+        if ":" not in line:
+            continue
 
-        elif line.lower().startswith("instansi:"):
-            instansi = line.split(":", 1)[1].strip()
+        key, value = line.split(":", 1)
 
-        elif line.lower().startswith("email:"):
-            email = line.split(":", 1)[1].strip()
+        key = key.strip().lower()
+        value = value.strip()
+
+        if key == "nama":
+            nama = value
+
+        elif key == "instansi":
+            instansi = value
+
+        elif key == "email":
+            email = value
 
     if not nama or not instansi or email is None:
         return None
@@ -72,19 +81,31 @@ def handle_registration(
     message: str
 ):
 
+    print("=== HANDLE REGISTRATION ===")
+    print("Step:", user.registration_step)
+    print("Message:")
+    print(message)
+
     if user.registration_step != "ASK_REGISTRATION":
         return None
 
     data = parse_registration(message)
 
+    print("Parse Result:", data)
+
     if data is None:
+        print("Gagal parse")
         return TEMPLATE_REGISTRASI
+
+    print("Berhasil parse")
 
     save_registration(
         db=db,
         user=user,
         data=data
     )
+
+    print("Step sesudah save:", user.registration_step)
 
     first_name = user.nama.split()[0]
 
