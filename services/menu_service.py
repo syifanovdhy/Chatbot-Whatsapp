@@ -1,3 +1,16 @@
+from constants.states import MAIN_MENU
+from models import UserDB
+
+def handle_main_menu(
+    user: UserDB,
+    message: str
+):
+
+    if user.registration_step != MAIN_MENU:
+        return None
+
+    return process_menu_choice(message)
+
 def get_main_menu():
     return """
     📋 *Silakan pilih layanan yang tersedia*

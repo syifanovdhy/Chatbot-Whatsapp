@@ -1,6 +1,25 @@
-2026/07/07-10:30:05.992 5394 Reusing MANIFEST E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2026/07/07-10:30:05.999 5394 Recovering log #79
-2026/07/07-10:30:06.025 5394 Reusing old log E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000079.log 
-2026/07/07-10:30:06.025 5394 Delete type=2 #76
-2026/07/07-10:30:06.025 5394 Delete type=2 #77
-2026/07/07-10:30:06.025 5394 Delete type=2 #80
+2026/07/07-11:59:01.958 650c Reusing MANIFEST E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/07/07-11:59:01.958 650c Recovering log #79
+2026/07/07-11:59:01.989 650c Reusing old log E:\SYIFA\Chatbot-Whatsapp\wa-bridge\.wwebjs_auth\session-pst-bot\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000079.log 
+2026/07/07-11:59:06.087 12b8 Level-0 table #85: started
+2026/07/07-11:59:06.102 12b8 Level-0 table #85: 1092675 bytes OK
+2026/07/07-11:59:06.104 12b8 Delete type=0 #79
+2026/07/07-11:59:06.649 5278 Compacting 1@1 + 2@2 files
+2026/07/07-11:59:06.696 5278 Generated table #86@1: 48231 keys, 2288258 bytes
+2026/07/07-11:59:06.708 5278 Generated table #87@1: 13218 keys, 841964 bytes
+2026/07/07-11:59:06.709 5278 Compacted 1@1 + 2@2 files => 3130222 bytes
+2026/07/07-11:59:06.709 5278 compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/07/07-11:59:06.709 5278 Delete type=2 #81
+2026/07/07-11:59:06.709 5278 Delete type=2 #82
+2026/07/07-11:59:06.709 5278 Delete type=2 #85
+2026/07/07-12:03:44.564 5a40 Level-0 table #89: started
+2026/07/07-12:03:44.590 5a40 Level-0 table #89: 1903126 bytes OK
+2026/07/07-12:03:44.591 5a40 Delete type=0 #84
+2026/07/07-12:03:47.360 5a40 Compacting 1@1 + 2@2 files
+2026/07/07-12:03:47.405 5a40 Generated table #90@1: 49336 keys, 2298525 bytes
+2026/07/07-12:03:47.417 5a40 Generated table #91@1: 15407 keys, 1063130 bytes
+2026/07/07-12:03:47.417 5a40 Compacted 1@1 + 2@2 files => 3361655 bytes
+2026/07/07-12:03:47.417 5a40 compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/07/07-12:03:47.417 5a40 Delete type=2 #86
+2026/07/07-12:03:47.417 5a40 Delete type=2 #87
+2026/07/07-12:03:47.417 5a40 Delete type=2 #89
