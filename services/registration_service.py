@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from models import UserDB
 from services.menu_service import get_main_menu
+from constants.states import ASK_REGISTRATION, MAIN_MENU
 
 TEMPLATE_REGISTRASI = (
     "👋 Selamat datang di Pelayanan Statistik Terpadu (PST)\n"
@@ -71,7 +72,7 @@ def save_registration(
     else:
         user.email = data["email"]
 
-    user.registration_step = "MAIN_MENU"
+    user.registration_step = MAIN_MENU
 
     db.commit()
 
@@ -86,7 +87,7 @@ def handle_registration(
     print("Message:")
     print(message)
 
-    if user.registration_step != "ASK_REGISTRATION":
+    if user.registration_step != ASK_REGISTRATION:
         return None
 
     data = parse_registration(message)

@@ -1,6 +1,7 @@
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy import Integer, String, ForeignKey, DateTime
 from datetime import datetime
+from constants.states import ASK_REGISTRATION
 
 class Base(DeclarativeBase):
     pass
@@ -15,7 +16,7 @@ class UserDB(Base):
     menu_logs: Mapped[list["MenuLogDB"]] = relationship(back_populates="user", cascade="all, delete-orphan")
     status: Mapped[str] = mapped_column(String(20), default="BOT_MODE")
     whatsapp_accounts: Mapped[list["WhatsAppUserDB"]] = relationship(back_populates="user", cascade="all, delete-orphan")
-    registration_step: Mapped[str] = mapped_column(String(30),default="ASK_REGISTRATION")
+    registration_step: Mapped[str] = mapped_column(String(30),default=ASK_REGISTRATION)
 
 class ConsultationDB(Base):
     __tablename__ = "consultations"
