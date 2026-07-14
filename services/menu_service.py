@@ -39,19 +39,7 @@ def process_menu_choice(choice: str):
         Ketik 0 untuk kembali ke menu utama.
         """
     elif choice == "2":
-        return """
-        📞 KONSULTASI STATISTIK
-
-        Silakan tunggu petugas PST.
-
-        Sebelum terhubung, mohon kirim:
-
-        Nama:
-        Instansi:
-        Keperluan:
-
-        Ketik 0 untuk kembali ke menu utama.
-        """
+        return None 
 
     elif choice == "3":
         return """
