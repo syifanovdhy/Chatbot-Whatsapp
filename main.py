@@ -10,6 +10,7 @@ from routers.menu import router as menu_router
 from routers.stats import router as stats_router
 from routers.agent import router as agent_router
 from routers.chat import router as agent_chat
+from routers.dashboard import router as dashboard_router
 
 app = FastAPI()
 
@@ -22,3 +23,4 @@ app.include_router(menu_router)
 app.include_router(stats_router)
 app.include_router(agent_router)
 app.include_router(agent_chat)
+app.include_router(dashboard_router)

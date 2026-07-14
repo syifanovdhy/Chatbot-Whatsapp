@@ -1,0 +1,299 @@
+ .../__pycache__/messsage_types.cpython-314.pyc     |  Bin [31m0[m -> [32m233[m bytes
+ constants/__pycache__/states.cpython-314.pyc       |  Bin [31m338[m -> [32m494[m bytes
+ constants/messsage_types.py                        |    3 [32m+[m
+ constants/states.py                                |    8 [32m+[m[31m-[m
+ pst_bot.db                                         |  Bin [31m28672[m -> [32m28672[m bytes
+ routers/__pycache__/consultation.cpython-314.pyc   |  Bin [31m3323[m -> [32m3396[m bytes
+ routers/consultation.py                            |    3 [32m+[m[31m-[m
+ services/__pycache__/chat_service.cpython-314.pyc  |  Bin [31m1696[m -> [32m1315[m bytes
+ .../consultation_service.cpython-314.pyc           |  Bin [31m0[m -> [32m3813[m bytes
+ services/__pycache__/menu_service.cpython-314.pyc  |  Bin [31m2748[m -> [32m2521[m bytes
+ services/chat_service.py                           |   24 [32m+[m[31m-[m
+ services/consultation_service.py                   |  125 [32m+[m
+ services/menu_service.py                           |   14 [32m+[m[31m-[m
+ wa-bridge/.gitignore                               |    4 [32m+[m[31m-[m
+ .../session-pst-bot/BrowserMetrics-spare.pma       |  Bin [31m4194304[m -> [32m0[m bytes
+ .../CertificateRevocation/10631/LICENSE            |   27 [31m-[m
+ .../10631/_metadata/verified_contents.json         |    1 [31m-[m
+ .../CertificateRevocation/10631/crl-set            |  Bin [31m1641001[m -> [32m0[m bytes
+ .../CertificateRevocation/10631/manifest.json      |    5 [31m-[m
+ .../.wwebjs_auth/session-pst-bot/Crashpad/metadata |    0
+ .../session-pst-bot/Crashpad/settings.dat          |  Bin [31m40[m -> [32m0[m bytes
+ .../session-pst-bot/Default/Account Web Data       |  Bin [31m77824[m -> [32m0[m bytes
+ .../Default/Account Web Data-journal               |    0
+ .../session-pst-bot/Default/Affiliation Database   |  Bin [31m53248[m -> [32m0[m bytes
+ .../Default/Affiliation Database-journal           |    0
+ .../Default/AutofillAiModelCache/LOCK              |    0
+ .../Default/AutofillAiModelCache/LOG               |    0
+ .../Default/AutofillAiModelCache/LOG.old           |    0
+ .../Default/AutofillStrikeDatabase/LOCK            |    0
+ .../Default/AutofillStrikeDatabase/LOG             |    0
+ .../Default/AutofillStrikeDatabase/LOG.old         |    0
+ .../Default/BookmarkMergedSurfaceOrdering          |    2 [31m-[m
+ .../session-pst-bot/Default/BudgetDatabase/LOCK    |    0
+ .../session-pst-bot/Default/BudgetDatabase/LOG     |    0
+ .../session-pst-bot/Default/BudgetDatabase/LOG.old |    0
+ .../session-pst-bot/Default/Cache/Cache_Data/index |    1 [31m-[m
+ .../Default/Cache/Cache_Data/sqldb0                |  Bin [31m25264128[m -> [32m0[m bytes
+ .../Default/Cache/Cache_Data/sqldb0-wal            |  Bin [31m6765072[m -> [32m0[m bytes
+ .../Default/Cache/Cache_Data/sqldb1                |  Bin [31m19922944[m -> [32m0[m bytes
+ .../Default/Cache/Cache_Data/sqldb1-wal            |  Bin [31m6719752[m -> [32m0[m bytes
+ .../Default/Cache/Cache_Data/sqldb2                |  Bin [31m23920640[m -> [32m0[m bytes
+ .../Default/Cache/Cache_Data/sqldb2-wal            |  Bin [31m8174112[m -> [32m0[m bytes
+ .../Default/Cache/No_Vary_Search/journal.baj       |    1 [31m-[m
+ .../Default/Cache/No_Vary_Search/snapshot.baf      |  Bin [31m20[m -> [32m0[m bytes
+ .../Default/ClientCertificates/LOCK                |    0
+ .../session-pst-bot/Default/ClientCertificates/LOG |    0
+ .../Default/ClientCertificates/LOG.old             |    0
+ .../pc/5bb[a`6`2`239@eaue5-ba-[[u=2b`2.db          |  Bin [31m12288[m -> [32m0[m bytes
+ .../pc/5bb[a`6`2`239@eaue5-ba-[[u=2b`2.journal     |    0
+ .../Code Cache/pc/5bb[a`6`2`2e2.ue5-ba-[[u0@;`2.db |  Bin [31m101007360[m -> [32m0[m bytes
+ .../pc/5bb[a`6`2`2e2.ue5-ba-[[u0@;`2.journal       |    0
+ .../Default/Collaboration/MessageDB                |  Bin [31m20480[m -> [32m0[m bytes
+ .../Default/Collaboration/MessageDB-journal        |    0
+ .../.wwebjs_auth/session-pst-bot/Default/DIPS      |  Bin [31m4096[m -> [32m0[m bytes
+ .../.wwebjs_auth/session-pst-bot/Default/DIPS-wal  |  Bin [31m712792[m -> [32m0[m bytes
+ .../Default/DataSharing/DataSharingDB              |  Bin [31m20480[m -> [32m0[m bytes
+ .../Default/DataSharing/DataSharingDB-journal      |    0
+ .../Default/DawnGraphiteCache/data_0               |  Bin [31m8192[m -> [32m0[m bytes
+ .../Default/DawnGraphiteCache/data_1               |  Bin [31m270336[m -> [32m0[m bytes
+ .../Default/DawnGraphiteCache/data_2               |  Bin [31m8192[m -> [32m0[m bytes
+ .../Default/DawnGraphiteCache/data_3               |  Bin [31m8192[m -> [32m0[m bytes
+ .../Default/DawnGraphiteCache/index                |  Bin [31m262512[m -> [32m0[m bytes
+ .../session-pst-bot/Default/DawnWebGPUCache/data_0 |  Bin [31m8192[m -> [32m0[m bytes
+ .../session-pst-bot/Default/DawnWebGPUCache/data_1 |  Bin [31m270336[m -> [32m0[m bytes
+ .../session-pst-bot/Default/DawnWebGPUCache/data_2 |  Bin [31m8192[m -> [32m0[m bytes
+ .../session-pst-bot/Default/DawnWebGPUCache/data_3 |  Bin [31m8192[m -> [32m0[m bytes
+ .../session-pst-bot/Default/DawnWebGPUCache/index  |  Bin [31m262512[m -> [32m0[m bytes
+ .../Default/Extension Rules/000003.log             |  Bin [31m76[m -> [32m0[m bytes
+ .../Default/Extension Rules/CURRENT                |    1 [31m-[m
+ .../session-pst-bot/Default/Extension Rules/LOCK   |    0
+ .../session-pst-bot/Default/Extension Rules/LOG    |    2 [31m-[m
+ .../Default/Extension Rules/MANIFEST-000001        |  Bin [31m41[m -> [32m0[m bytes
+ .../Default/Extension Scripts/000003.log           |  Bin [31m38[m -> [32m0[m bytes
+ .../Default/Extension Scripts/CURRENT              |    1 [31m-[m
+ .../session-pst-bot/Default/Extension Scripts/LOCK |    0
+ .../session-pst-bot/Default/Extension Scripts/LOG  |    2 [31m-[m
+ .../Default/Extension Scripts/MANIFEST-000001      |  Bin [31m41[m -> [32m0[m bytes
+ .../Default/Extension State/000003.log             |  Bin [31m114[m -> [32m0[m bytes
+ .../Default/Extension State/CURRENT                |    1 [31m-[m
+ .../session-pst-bot/Default/Extension State/LOCK   |    0
+ .../session-pst-bot/Default/Extension State/LOG    |    3 [31m-[m
+ .../Default/Extension State/LOG.old                |    3 [31m-[m
+ .../Default/Extension State/MANIFEST-000001        |  Bin [31m41[m -> [32m0[m bytes
+ .../.wwebjs_auth/session-pst-bot/Default/Favicons  |  Bin [31m28672[m -> [32m0[m bytes
+ .../session-pst-bot/Default/Favicons-journal       |    0
+ .../Feature Engagement Tracker/AvailabilityDB/LOCK |    0
+ .../Feature Engagement Tracker/AvailabilityDB/LOG  |    0
+ .../AvailabilityDB/LOG.old                         |    0
+ .../Feature Engagement Tracker/EventDB/LOCK        |    0
+ .../Default/Feature Engagement Tracker/EventDB/LOG |    0
+ .../Feature Engagement Tracker/EventDB/LOG.old     |    0
+ .../session-pst-bot/Default/GCM Store/000003.log   |  Bin [31m1907[m -> [32m0[m bytes
+ .../session-pst-bot/Default/GCM Store/CURRENT      |    1 [31m-[m
+ .../session-pst-bot/Default/GCM Store/LOCK         |    0
+ .../session-pst-bot/Default/GCM Store/LOG          |    3 [31m-[m
+ .../session-pst-bot/Default/GCM Store/LOG.old      |    3 [31m-[m
+ .../Default/GCM Store/MANIFEST-000001              |  Bin [31m41[m -> [32m0[m bytes
+ .../session-pst-bot/Default/GPUCache/data_0        |  Bin [31m45056[m -> [32m0[m bytes
+ .../session-pst-bot/Default/GPUCache/data_1        |  Bin [31m270336[m -> [32m0[m bytes
+ .../session-pst-bot/Default/GPUCache/data_2        |  Bin [31m1056768[m -> [32m0[m bytes
+ .../session-pst-bot/Default/GPUCache/data_3        |  Bin [31m8192[m -> [32m0[m bytes
+ .../session-pst-bot/Default/GPUCache/index         |  Bin [31m262512[m -> [32m0[m bytes
+ .../.wwebjs_auth/session-pst-bot/Default/History   |  Bin [31m163840[m -> [32m0[m bytes
+ .../session-pst-bot/Default/History-journal        |  Bin [31m8720[m -> [32m0[m bytes
+ .../000088.log                                     |  Bin [31m332490[m -> [32m0[m bytes
+ .../000090.ldb                                     |  Bin [31m2298525[m -> [32m0[m bytes
+ .../000091.ldb                                     |  Bin [31m1063130[m -> [32m0[m bytes
+ .../CURRENT                                        |    1 [31m-[m
+ .../LOCK                                           |    0
+ .../https_web.whatsapp.com_0.indexeddb.leveldb/LOG |   25 [31m-[m
+ .../LOG.old                                        |    6 [31m-[m
+ .../MANIFEST-000001                                |  Bin [31m8259[m -> [32m0[m bytes
+ .../.wwebjs_auth/session-pst-bot/Default/LOCK      |    0
+ wa-bridge/.wwebjs_auth/session-pst-bot/Default/LOG |    0
+ .../.wwebjs_auth/session-pst-bot/Default/LOG.old   |    0
+ .../Default/Local Storage/leveldb/000005.ldb       |  Bin [31m15918[m -> [32m0[m bytes
+ .../Default/Local Storage/leveldb/000008.ldb       |  Bin [31m11930[m -> [32m0[m bytes
+ .../Default/Local Storage/leveldb/000011.ldb       |  Bin [31m12005[m -> [32m0[m bytes
+ .../Default/Local Storage/leveldb/000014.ldb       |  Bin [31m11904[m -> [32m0[m bytes
+ .../Default/Local Storage/leveldb/000016.log       |  Bin [31m30886[m -> [32m0[m bytes
+ .../Default/Local Storage/leveldb/000017.ldb       |  Bin [31m12488[m -> [32m0[m bytes
+ .../Default/Local Storage/leveldb/CURRENT          |    1 [31m-[m
+ .../Default/Local Storage/leveldb/LOCK             |    0
+ .../Default/Local Storage/leveldb/LOG              |    3 [31m-[m
+ .../Default/Local Storage/leveldb/LOG.old          |    3 [31m-[m
+ .../Default/Local Storage/leveldb/MANIFEST-000001  |  Bin [31m621[m -> [32m0[m bytes
+ .../session-pst-bot/Default/Login Data             |  Bin [31m40960[m -> [32m0[m bytes
+ .../session-pst-bot/Default/Login Data For Account |  Bin [31m40960[m -> [32m0[m bytes
+ .../Default/Login Data For Account-journal         |    0
+ .../session-pst-bot/Default/Login Data-journal     |    0
+ .../Default/Network Action Predictor               |  Bin [31m53248[m -> [32m0[m bytes
+ .../Default/Network Action Predictor-journal       |    0
+ .../session-pst-bot/Default/Network/Cookies        |  Bin [31m20480[m -> [32m0[m bytes
+ .../Default/Network/Cookies-journal                |    0
+ .../Default/Network/Device Bound Sessions          |  Bin [31m20480[m -> [32m0[m bytes
+ .../Default/Network/Device Bound Sessions-journal  |    0
+ .../Default/Network/Network Persistent State       |    1 [31m-[m
+ .../Default/Network/NetworkDataMigrated            |    0
+ .../Default/Network/Reporting and NEL              |  Bin [31m36864[m -> [32m0[m bytes
+ .../Default/Network/Reporting and NEL-journal      |    0
+ .../Default/Network/SCT Auditing Pending Reports   |    1 [31m-[m
+ .../Default/Network/TransportSecurity              |    1 [31m-[m
+ .../session-pst-bot/Default/Network/Trust Tokens   |  Bin [31m36864[m -> [32m0[m bytes
+ .../Default/Network/Trust Tokens-journal           |    0
+ .../Default/PersistentOriginTrials/LOCK            |    0
+ .../Default/PersistentOriginTrials/LOG             |    0
+ .../Default/PersistentOriginTrials/LOG.old         |    0
+ .../session-pst-bot/Default/Preferences            |    1 [31m-[m
+ .../session-pst-bot/Default/PreferredApps          |    1 [31m-[m
+ .../.wwebjs_auth/session-pst-bot/Default/README    |    1 [31m-[m
+ .../Safe Browsing Network/NetworkDataMigrated      |    0
+ .../Safe Browsing Network/Safe Browsing Cookies    |  Bin [31m20480[m -> [32m0[m bytes
+ .../Safe Browsing Cookies-journal                  |    0
+ .../session-pst-bot/Default/Secure Preferences     |    1 [31m-[m
+ .../Segmentation Platform/SegmentInfoDB/LOCK       |    0
+ .../Segmentation Platform/SegmentInfoDB/LOG        |    0
+ .../Segmentation Platform/SegmentInfoDB/LOG.old    |    0
+ .../Default/Segmentation Platform/SignalDB/LOCK    |    0
+ .../Default/Segmentation Platform/SignalDB/LOG     |    0
+ .../Default/Segmentation Platform/SignalDB/LOG.old |    0
+ .../SignalStorageConfigDB/LOCK                     |    0
+ .../SignalStorageConfigDB/LOG                      |    0
+ .../SignalStorageConfigDB/LOG.old                  |    0
+ .../session-pst-bot/Default/ServerCertificate      |  Bin [31m20480[m -> [32m0[m bytes
+ .../Default/ServerCertificate-journal              |    0
+ .../9c4b304a-d9e7-4245-a8bd-b1fe55bafbf8/index     |  Bin [31m24[m -> [32m0[m bytes
+ .../index-dir/the-real-index                       |  Bin [31m48[m -> [32m0[m bytes
+ .../2a2b7cbbc61290b4_0                             |  Bin [31m315[m -> [32m0[m bytes
+ .../6ea66fa5b36b4157_0                             |  Bin [31m407[m -> [32m0[m bytes
+ .../92172a9e586cee2a_0                             |  Bin [31m474[m -> [32m0[m bytes
+ .../e6039a61e4d2a504_0                             |  Bin [31m841[m -> [32m0[m bytes
+ .../ace798c8-214a-45e8-a501-f6a058e44c73/index     |  Bin [31m24[m -> [32m0[m bytes
+ .../index-dir/the-real-index                       |  Bin [31m144[m -> [32m0[m bytes
+ .../b5fdce2f-950d-49bc-b045-c4b7c581e493/index     |  Bin [31m24[m -> [32m0[m bytes
+ .../index-dir/the-real-index                       |  Bin [31m48[m -> [32m0[m bytes
+ .../index.txt                                      |  Bin [31m415[m -> [32m0[m bytes
+ .../Default/Service Worker/Database/000003.log     |  Bin [31m23128[m -> [32m0[m bytes
+ .../Default/Service Worker/Database/CURRENT        |    1 [31m-[m
+ .../Default/Service Worker/Database/LOCK           |    0
+ .../Default/Service Worker/Database/LOG            |    3 [31m-[m
+ .../Default/Service Worker/Database/LOG.old        |    3 [31m-[m
+ .../Service Worker/Database/MANIFEST-000001        |  Bin [31m41[m -> [32m0[m bytes
+ .../Service Worker/ScriptCache/8a729281c4672a97_0  |  Bin [31m5345996[m -> [32m0[m bytes
+ .../Service Worker/ScriptCache/8a729281c4672a97_1  |  Bin [31m9473386[m -> [32m0[m bytes
+ .../Service Worker/ScriptCache/b2efa64ecb36f8f1_0  |  Bin [31m18444[m -> [32m0[m bytes
+ .../Service Worker/ScriptCache/b2efa64ecb36f8f1_1  |  Bin [31m10434[m -> [32m0[m bytes
+ .../Default/Service Worker/ScriptCache/index       |  Bin [31m24[m -> [32m0[m bytes
+ .../ScriptCache/index-dir/the-real-index           |  Bin [31m96[m -> [32m0[m bytes
+ .../Default/Session Storage/000003.log             |  Bin [31m5050[m -> [32m0[m bytes
+ .../Default/Session Storage/CURRENT                |    1 [31m-[m
+ .../session-pst-bot/Default/Session Storage/LOCK   |    0
+ .../session-pst-bot/Default/Session Storage/LOG    |    3 [31m-[m
+ .../Default/Session Storage/LOG.old                |    3 [31m-[m
+ .../Default/Session Storage/MANIFEST-000001        |  Bin [31m41[m -> [32m0[m bytes
+ .../Default/Sessions/Session_13426913643330152     |  Bin [31m5370[m -> [32m0[m bytes
+ .../Default/Sessions/Tabs_13427865008100234        |  Bin [31m68164[m -> [32m0[m bytes
+ .../Default/Sessions/Tabs_13427870344069249        |  Bin [31m71751[m -> [32m0[m bytes
+ .../Default/Shared Dictionary/cache/index          |  Bin [31m24[m -> [32m0[m bytes
+ .../cache/index-dir/the-real-index                 |  Bin [31m48[m -> [32m0[m bytes
+ .../session-pst-bot/Default/Shared Dictionary/db   |  Bin [31m45056[m -> [32m0[m bytes
+ .../Default/Shared Dictionary/db-journal           |    0
+ .../session-pst-bot/Default/SharedStorage          |  Bin [31m4096[m -> [32m0[m bytes
+ .../session-pst-bot/Default/SharedStorage-wal      |    0
+ .../.wwebjs_auth/session-pst-bot/Default/Shortcuts |  Bin [31m20480[m -> [32m0[m bytes
+ .../session-pst-bot/Default/Shortcuts-journal      |    0
+ .../Site Characteristics Database/000003.log       |  Bin [31m40[m -> [32m0[m bytes
+ .../Default/Site Characteristics Database/CURRENT  |    1 [31m-[m
+ .../Default/Site Characteristics Database/LOCK     |    0
+ .../Default/Site Characteristics Database/LOG      |    3 [31m-[m
+ .../Default/Site Characteristics Database/LOG.old  |    3 [31m-[m
+ .../Site Characteristics Database/MANIFEST-000001  |  Bin [31m41[m -> [32m0[m bytes
+ .../Default/Sync Data/LevelDB/000003.log           |  Bin [31m137[m -> [32m0[m bytes
+ .../Default/Sync Data/LevelDB/CURRENT              |    1 [31m-[m
+ .../session-pst-bot/Default/Sync Data/LevelDB/LOCK |    0
+ .../session-pst-bot/Default/Sync Data/LevelDB/LOG  |    3 [31m-[m
+ .../Default/Sync Data/LevelDB/LOG.old              |    3 [31m-[m
+ .../Default/Sync Data/LevelDB/MANIFEST-000001      |  Bin [31m41[m -> [32m0[m bytes
+ .../.wwebjs_auth/session-pst-bot/Default/Top Sites |  Bin [31m20480[m -> [32m0[m bytes
+ .../session-pst-bot/Default/Top Sites-journal      |    0
+ .../session-pst-bot/Default/VideoDecodeStats/LOCK  |    0
+ .../session-pst-bot/Default/VideoDecodeStats/LOG   |    0
+ .../Default/VideoDecodeStats/LOG.old               |    0
+ .../.wwebjs_auth/session-pst-bot/Default/Web Data  |  Bin [31m157696[m -> [32m0[m bytes
+ .../session-pst-bot/Default/Web Data-journal       |    0
+ .../2/IndexedDB/indexeddb.leveldb/000003.log       |  Bin [31m208[m -> [32m0[m bytes
+ .../2/IndexedDB/indexeddb.leveldb/CURRENT          |    1 [31m-[m
+ .../WebStorage/2/IndexedDB/indexeddb.leveldb/LOCK  |    0
+ .../WebStorage/2/IndexedDB/indexeddb.leveldb/LOG   |    2 [31m-[m
+ .../2/IndexedDB/indexeddb.leveldb/MANIFEST-000001  |  Bin [31m23[m -> [32m0[m bytes
+ .../Default/WebStorage/QuotaManager                |  Bin [31m40960[m -> [32m0[m bytes
+ .../Default/WebStorage/QuotaManager-journal        |  Bin [31m8720[m -> [32m0[m bytes
+ .../session-pst-bot/Default/chrome_cart_db/LOCK    |    0
+ .../session-pst-bot/Default/chrome_cart_db/LOG     |    0
+ .../session-pst-bot/Default/chrome_cart_db/LOG.old |    0
+ .../Default/commerce_subscription_db/LOCK          |    0
+ .../Default/commerce_subscription_db/LOG           |    0
+ .../Default/commerce_subscription_db/LOG.old       |    0
+ .../session-pst-bot/Default/discount_infos_db/LOCK |    0
+ .../session-pst-bot/Default/discount_infos_db/LOG  |    0
+ .../Default/discount_infos_db/LOG.old              |    0
+ .../session-pst-bot/Default/discounts_db/LOCK      |    0
+ .../session-pst-bot/Default/discounts_db/LOG       |    0
+ .../session-pst-bot/Default/discounts_db/LOG.old   |    0
+ .../Default/heavy_ad_intervention_opt_out.db       |  Bin [31m16384[m -> [32m0[m bytes
+ .../heavy_ad_intervention_opt_out.db-journal       |    0
+ .../Default/parcel_tracking_db/LOCK                |    0
+ .../session-pst-bot/Default/parcel_tracking_db/LOG |    0
+ .../Default/parcel_tracking_db/LOG.old             |    0
+ .../session-pst-bot/Default/passkey_enclave_state  |  Bin [31m66[m -> [32m0[m bytes
+ .../Default/shared_proto_db/000003.log             |  Bin [31m123744[m -> [32m0[m bytes
+ .../Default/shared_proto_db/CURRENT                |    1 [31m-[m
+ .../session-pst-bot/Default/shared_proto_db/LOCK   |    0
+ .../session-pst-bot/Default/shared_proto_db/LOG    |    3 [31m-[m
+ .../Default/shared_proto_db/LOG.old                |    3 [31m-[m
+ .../Default/shared_proto_db/MANIFEST-000001        |  Bin [31m41[m -> [32m0[m bytes
+ .../Default/shared_proto_db/metadata/000003.log    |  Bin [31m1764[m -> [32m0[m bytes
+ .../Default/shared_proto_db/metadata/CURRENT       |    1 [31m-[m
+ .../Default/shared_proto_db/metadata/LOCK          |    0
+ .../Default/shared_proto_db/metadata/LOG           |    3 [31m-[m
+ .../Default/shared_proto_db/metadata/LOG.old       |    3 [31m-[m
+ .../shared_proto_db/metadata/MANIFEST-000001       |  Bin [31m41[m -> [32m0[m bytes
+ .../session-pst-bot/Default/trusted_vault.pb       |    2 [31m-[m
+ .../session-pst-bot/DevToolsActivePort             |    2 [31m-[m
+ .../LNUUVOIDXJ53BWDLNCF5GOEQVVDCFJP2/cache.db      |  Bin [31m4096[m -> [32m0[m bytes
+ .../LNUUVOIDXJ53BWDLNCF5GOEQVVDCFJP2/cache.db-wal  |  Bin [31m3394912[m -> [32m0[m bytes
+ .../LNUUVOIDXJ53BWDLNCF5GOEQVVDCFJP2/cache.journal |    0
+ .../DJVAYDWUQXJ76A7PCYCAWXLSFG27IPSE/cache.db      |  Bin [31m4096[m -> [32m0[m bytes
+ .../DJVAYDWUQXJ76A7PCYCAWXLSFG27IPSE/cache.db-wal  |  Bin [31m12392[m -> [32m0[m bytes
+ .../DJVAYDWUQXJ76A7PCYCAWXLSFG27IPSE/cache.journal |    0
+ .../.wwebjs_auth/session-pst-bot/Last Browser      |  Bin [31m180[m -> [32m0[m bytes
+ .../.wwebjs_auth/session-pst-bot/Last Version      |    1 [31m-[m
+ wa-bridge/.wwebjs_auth/session-pst-bot/Local State |    1 [31m-[m
+ .../Indexed Rules/37/9.69.0/Ruleset Data           |  Bin [31m248280[m -> [32m0[m bytes
+ .../Unindexed Rules/9.69.0/Filtering Rules         | 6137 [31m--------------------[m
+ .../Unindexed Rules/9.69.0/LICENSE.txt             |  383 [31m--[m
+ .../9.69.0/_metadata/verified_contents.json        |    1 [31m-[m
+ .../Unindexed Rules/9.69.0/manifest.json           |    6 [31m-[m
+ wa-bridge/.wwebjs_auth/session-pst-bot/Variations  |    1 [31m-[m
+ ...fd7a531417b2fb2bc9793be041660492f34ea2bd508460f |  Bin [31m1646028[m -> [32m0[m bytes
+ ...a701caf825445aa82f36f7cb81cc3fb19ee6f326eba1d1c |  Bin [31m184766[m -> [32m0[m bytes
+ .../component_crx_cache/metadata.json              |    1 [31m-[m
+ .../extensions_crx_cache/metadata.json             |    1 [31m-[m
+ .../session-pst-bot/first_party_sets.db            |  Bin [31m49152[m -> [32m0[m bytes
+ .../session-pst-bot/first_party_sets.db-journal    |    0
+ .../session-pst-bot/segmentation_platform/ukm_db   |  Bin [31m49152[m -> [32m0[m bytes
+ .../segmentation_platform/ukm_db-wal               |    0
+ wa-bridge/.wwebjs_cache/2.3000.1042161663.html     |   81 [31m-[m
+ wa-bridge/.wwebjs_cache/2.3000.1042168942.html     |   80 [31m-[m
+ wa-bridge/.wwebjs_cache/2.3000.1042178212.html     |   80 [31m-[m
+ wa-bridge/.wwebjs_cache/2.3000.1042181983.html     |   80 [31m-[m
+ wa-bridge/.wwebjs_cache/2.3000.1042284665.html     |   80 [31m-[m
+ wa-bridge/.wwebjs_cache/2.3000.1042287432.html     |   80 [31m-[m
+ wa-bridge/.wwebjs_cache/2.3000.1042505466.html     |   80 [31m-[m
+ wa-bridge/.wwebjs_cache/2.3000.1042653905.html     |   80 [31m-[m
+ wa-bridge/.wwebjs_cache/2.3000.1042655859.html     |   80 [31m-[m
+ wa-bridge/.wwebjs_cache/2.3000.1042657073.html     |   80 [31m-[m
+ wa-bridge/.wwebjs_cache/2.3000.1042721937.html     |   80 [31m-[m
+ wa-bridge/.wwebjs_cache/2.3000.1042727716.html     |   80 [31m-[m
+ 298 files changed, 158 insertions(+), 7668 deletions(-)
