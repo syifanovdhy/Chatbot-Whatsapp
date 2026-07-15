@@ -1,29 +1,34 @@
+const {
+    sendWhatsAppMessage
+} = require("./whatsappService");
+
 module.exports = function registerSendMessage(app, client) {
 
     app.post("/send-message", async (req, res) => {
 
-        try {
+        const {
+            wa_id,
+            message
+        } = req.body;
 
-            const { wa_id, message } = req.body;
-
-            await client.sendMessage(
+        const success =
+            await sendWhatsAppMessage(
+                client,
                 wa_id,
                 message
             );
 
-            res.json({
+        if (success) {
+
+            return res.json({
                 success: true
             });
 
-        } catch (err) {
-
-            console.log(err);
-
-            res.status(500).json({
-                success: false
-            });
-
         }
+
+        return res.status(500).json({
+            success: false
+        });
 
     });
 
