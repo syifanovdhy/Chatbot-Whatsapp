@@ -1,0 +1,51 @@
+from sqlalchemy.orm import Session
+
+from models import (
+    ConsultationDB,
+    MessageDB,
+    WhatsAppUserDB
+)
+
+from constants.message_types import (
+    SENDER_USER,
+    SENDER_AGENT
+)
+
+from routers import message
+from services.whatsapp_gateway import (
+    send_whatsapp_message
+)
+
+def add_agent_message(
+    db: Session,
+    consultation: ConsultationDB,
+    message: str
+):
+    new_message = MessageDB(
+        consultation_id=consultation.id,
+        sender=SENDER_AGENT,
+        content=message
+    )
+
+    db.add(new_message)
+    db.commit()
+
+def send_agent_reply(
+    db: Session,
+    consultation: ConsultationDB,
+    message: str
+):
+    wa_account = consultation.user.whatsapp_accounts[0]
+
+    send_whatsapp_message(
+        wa_account.wa_id,
+        message
+    )
+
+    add_agent_message(
+        db,
+        consultation,
+        message
+    )
+
+    return True

@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from constants.messsage_types import SENDER_USER
+from constants.message_types import SENDER_USER
 from models import ConsultationDB, MessageDB
 from models import UserDB
 
