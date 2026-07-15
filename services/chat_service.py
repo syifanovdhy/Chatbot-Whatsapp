@@ -1,4 +1,6 @@
 from sqlalchemy.orm import Session
+from constants.states import AGENT_MODE
+from services.agent_service import handle_agent_mode
 from services.whatsapp_user_service import get_or_create_user
 from services.registration_service import handle_registration
 from services.menu_service import handle_main_menu
@@ -15,6 +17,14 @@ def process_chat(
         wa_id=wa_id,
         push_name=push_name
     )
+
+    if user.status == AGENT_MODE:
+
+        return handle_agent_mode(
+            db=db,
+            user=user,
+            message=message
+        )
 
     # print("=================================")
     # print("User ID   :", user.id)

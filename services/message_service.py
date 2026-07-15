@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 
+from constants.states import AGENT_MODE
 from models import (
     ConsultationDB,
     MessageDB,
@@ -47,5 +48,9 @@ def send_agent_reply(
         consultation,
         message
     )
+
+    consultation.user.status = AGENT_MODE
+
+    db.commit()
 
     return True
