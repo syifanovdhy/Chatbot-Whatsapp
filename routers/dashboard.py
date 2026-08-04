@@ -151,3 +151,35 @@ def reply_consultation(
     return {
         "success": True
     }
+
+@router.post(
+    "/consultations/{consultation_id}/finish"
+)
+def finish_consultation_api(
+    consultation_id: int,
+    db: Session = Depends(get_db)
+):
+
+    consultation = db.get(
+        ConsultationDB,
+        consultation_id
+    )
+
+    if consultation is None:
+
+        return {
+            "success": False
+        }
+
+    from services.consultation_service import (
+        finish_consultation
+    )
+
+    finish_consultation(
+        db=db,
+        consultation=consultation
+    )
+
+    return {
+        "success": True
+    }

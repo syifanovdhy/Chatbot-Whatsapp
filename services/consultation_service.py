@@ -5,11 +5,14 @@ from models import UserDB
 
 from constants.states import (
     CONSULTATION_STATUS_WAITING_AGENT,
+    BOT_MODE,
     MAIN_MENU,
     WAITING_CONSULTATION,
-    WAITING_AGENT
+    WAITING_AGENT,
+    CONSULTATION_FINISHED
 )
 from services.menu_service import get_main_menu
+from services.whatsapp_gateway import send_whatsapp_message
 
 def handle_consultation(
     db: Session,
@@ -121,5 +124,35 @@ def get_active_consultation(
         )
         .order_by(ConsultationDB.started_at.desc())
         .first()
+    )
+
+def finish_consultation(
+    db: Session,
+    consultation: ConsultationDB
+):
+
+    consultation.status = CONSULTATION_FINISHED
+
+    consultation.user.status = BOT_MODE
+
+    consultation.user.registration_step = MAIN_MENU
+
+    db.commit()
+
+    wa = consultation.user.whatsapp_accounts[0]
+
+    send_whatsapp_message(
+
+        wa.wa_id,
+
+        (
+            "✅ Konsultasi telah selesai.\n\n"
+            "Terima kasih telah menggunakan "
+            "Pelayanan Statistik Terpadu "
+            "BPS Kabupaten Banggai Kepulauan.\n\n"
+            "Apabila membutuhkan layanan lain,"
+            " silakan ketik *0* untuk kembali "
+            "ke menu utama."
+        )
     )
     

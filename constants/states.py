@@ -1,8 +1,7 @@
-# ===== Registration =====
-
+# Registration
 ASK_REGISTRATION = "ASK_REGISTRATION"
-
 MAIN_MENU = "MAIN_MENU"
+WAITING_CONSULTATION = "WAITING_CONSULTATION"
 
 # ===== Consultation =====
 
@@ -20,6 +19,7 @@ CONSULTATION_STATUS_ACTIVE = "active"
 
 CONSULTATION_STATUS_FINISHED = "finished"
 
-BOT_MODE = "BOT_MODE"
 
+# User Mode
+BOT_MODE = "BOT_MODE"
 AGENT_MODE = "AGENT_MODE"
