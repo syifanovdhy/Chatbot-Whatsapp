@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import session
 
-from constants.states import CONSULTATION_STATUS_WAITING_AGENT
+from constants.states import CONSULTATION_WAITING
 from dependencies import get_db
 from models import ConsultationDB, MessageDB
 from schemas.consultation import ConsultationCreate
@@ -16,7 +16,7 @@ def create_consultation_db(
     new_consultation = ConsultationDB(
         user_id=consultation.user_id,
         keperluan=consultation.keperluan,
-        status=CONSULTATION_STATUS_WAITING_AGENT
+        status=CONSULTATION_WAITING
     )
     db.add(new_consultation)
     db.commit()

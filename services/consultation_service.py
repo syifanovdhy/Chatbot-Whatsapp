@@ -4,7 +4,7 @@ from models import ConsultationDB, MessageDB
 from models import UserDB
 
 from constants.states import (
-    CONSULTATION_STATUS_WAITING_AGENT,
+    CONSULTATION_WAITING,
     BOT_MODE,
     MAIN_MENU,
     WAITING_CONSULTATION,
@@ -43,7 +43,7 @@ def handle_consultation(
         consultation = ConsultationDB(
             user_id=user.id,
             keperluan=message,
-            status="waiting_agent"
+            status=CONSULTATION_WAITING
         )
 
         db.add(consultation)
@@ -94,8 +94,6 @@ def handle_consultation(
         "Petugas PST akan segera membalas."
     )
 
-    return None
-
 def save_user_message(
     db: Session,
     consultation: ConsultationDB,
@@ -120,7 +118,7 @@ def get_active_consultation(
         db.query(ConsultationDB)
         .filter(
             ConsultationDB.user_id == user_id,
-            ConsultationDB.status == CONSULTATION_STATUS_WAITING_AGENT
+            ConsultationDB.status == CONSULTATION_WAITING
         )
         .order_by(ConsultationDB.started_at.desc())
         .first()
