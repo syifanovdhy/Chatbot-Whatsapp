@@ -12,6 +12,7 @@ from constants.states import (
     CONSULTATION_FINISHED
 )
 from services.menu_service import get_main_menu
+from services.timeout_service import start_timeout
 from services.whatsapp_gateway import send_whatsapp_message
 
 def handle_consultation(
@@ -52,7 +53,7 @@ def handle_consultation(
 
         first_message = MessageDB(
             consultation_id=consultation.id,
-            sender="user",
+            sender="SENDER_USER",
             content=message
         )
 
@@ -62,11 +63,14 @@ def handle_consultation(
 
         db.commit()
 
+        start_timeout(consultation.id)
+
         return (
             "✅ Permintaan konsultasi telah diterima.\n\n"
             "Petugas PST akan segera membalas pesan Anda.\n\n"
             "Mohon tunggu beberapa saat."
         )
+        
     
     if user.registration_step == WAITING_AGENT:
 
