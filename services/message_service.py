@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 
+from constants.activity_types import AGENT_REPLY
 from constants.states import AGENT_MODE, CONSULTATION_ACTIVE
 from models import (
     ConsultationDB,
@@ -13,6 +14,7 @@ from constants.message_types import (
 )
 
 from routers import message
+from services.activity_services import add_activity
 from services.whatsapp_gateway import (
     send_whatsapp_message
 )
@@ -30,6 +32,13 @@ def add_agent_message(
 
     db.add(new_message)
     db.commit()
+
+    add_activity(
+        db=db,
+        consultation=consultation,
+        activity=AGENT_REPLY,
+        description="Petugas membalas"
+    )
 
 def send_agent_reply(
     db: Session,

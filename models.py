@@ -29,6 +29,7 @@ class ConsultationDB(Base):
     started_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     agent_replied: Mapped[bool] = mapped_column(default=False)
     timeout_sent : Mapped[bool] = mapped_column(default=False)
+    activity_logs: Mapped[list["ActivityLogDB"]] = relationship(back_populates="consultation", cascade="all, delete-orphan")
 
 class MessageDB(Base) :    
     __tablename__ = "messages"
@@ -56,3 +57,11 @@ class WhatsAppUserDB(Base):
     user: Mapped["UserDB"] = relationship(back_populates="whatsapp_accounts")
     registered_at: Mapped[datetime] = mapped_column(DateTime,default=datetime.utcnow)
 
+class ActivityLogDB(Base):
+    __tablename__ = "activity_logs"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    consultation_id: Mapped[int] = mapped_column(ForeignKey("consultations.id"))
+    activity: Mapped[str] = mapped_column(String(50))
+    description: Mapped[str] = mapped_column(String(255))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    consultation: Mapped["ConsultationDB"] = relationship(back_populates="activity_logs")

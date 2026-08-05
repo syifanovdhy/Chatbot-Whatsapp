@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from constants.activity_types import CONSULTATION_CREATED, USER_MESSAGE
 from constants.message_types import SENDER_USER
 from models import ConsultationDB, MessageDB
 from models import UserDB
@@ -11,6 +12,7 @@ from constants.states import (
     WAITING_AGENT,
     CONSULTATION_FINISHED
 )
+from services.activity_services import add_activity
 from services.menu_service import get_main_menu
 from services.timeout_service import start_timeout
 from services.whatsapp_gateway import send_whatsapp_message
@@ -50,6 +52,13 @@ def handle_consultation(
         db.add(consultation)
         db.commit()
         db.refresh(consultation)
+
+        add_activity(
+            db=db,
+            consultation=consultation,
+            activity=CONSULTATION_CREATED,
+            description="Konsultasi dibuat"
+        )
 
         first_message = MessageDB(
             consultation_id=consultation.id,
@@ -113,6 +122,13 @@ def save_user_message(
     db.add(new_message)
     db.commit()
 
+    add_activity(
+        db=db,
+        consultation=consultation,
+        activity=USER_MESSAGE,
+        description="User mengirim pesan"
+    )
+
 def get_active_consultation(
     db: Session,
     user_id: int
@@ -134,19 +150,20 @@ def finish_consultation(
 ):
 
     consultation.status = CONSULTATION_FINISHED
+    add_activity(
+        db=db,
+        consultation=consultation,
+        activity=CONSULTATION_FINISHED,
+        description="Konsultasi selesai"
+    )
 
     consultation.user.status = BOT_MODE
-
     consultation.user.registration_step = MAIN_MENU
-
     db.commit()
 
     wa = consultation.user.whatsapp_accounts[0]
-
     send_whatsapp_message(
-
         wa.wa_id,
-
         (
             "✅ Konsultasi telah selesai.\n\n"
             "Terima kasih telah menggunakan "
