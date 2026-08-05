@@ -36,6 +36,7 @@ class MessageDB(Base) :
     consultation_id: Mapped[int] = mapped_column(ForeignKey("consultations.id"))
     sender: Mapped[str] = mapped_column(String(50))
     content: Mapped[str] = mapped_column(String(200))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     consultation : Mapped["ConsultationDB"] = relationship(back_populates="messages")
 
 class MenuLogDB(Base):

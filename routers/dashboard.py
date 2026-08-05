@@ -36,7 +36,13 @@ def dashboard_consultations(
 
             "status": consultation.status,
 
-            "started_at": consultation.started_at
+            "started_at": consultation.started_at,
+
+            "keperluan": consultation.keperluan,
+
+            "jumlah_pesan": len(
+                consultation.messages
+            )
 
         })
 
