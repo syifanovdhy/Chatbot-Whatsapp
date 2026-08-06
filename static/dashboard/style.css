@@ -73,3 +73,25 @@ textarea{
     height:60px;
 
 }
+
+.consultation-item{
+
+    border:1px solid #ddd;
+
+    padding:12px;
+
+    margin-bottom:10px;
+
+    cursor:pointer;
+
+    border-radius:8px;
+
+    background:white;
+
+}
+
+.consultation-item:hover{
+
+    background:#f1f5ff;
+
+}
