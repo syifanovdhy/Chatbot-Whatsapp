@@ -95,3 +95,41 @@ textarea{
     background:#f1f5ff;
 
 }
+
+.bubble{
+
+    max-width:70%;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    margin-bottom:12px;
+
+}
+
+.user{
+
+    margin-left:auto;
+
+    background:#DCF8C6;
+
+}
+
+.agent{
+
+    background:white;
+
+}
+
+.activity{
+
+    text-align:center;
+
+    color:#777;
+
+    font-size:13px;
+
+    margin:15px 0;
+
+}

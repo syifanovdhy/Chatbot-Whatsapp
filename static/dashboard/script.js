@@ -1,3 +1,5 @@
+let currentConsultationId = null;
+
 async function loadConsultations() {
 
     const response = await fetch(
@@ -23,6 +25,24 @@ async function loadConsultations() {
             <small>${consultation.instansi}</small>
         `;
 
+        item.onclick = () => {
+
+            document.getElementById(
+                "customer-name"
+            ).innerText =
+                consultation.nama;
+
+            document.getElementById(
+                "customer-instansi"
+            ).innerText =
+                consultation.instansi;
+
+            loadTimeline(
+                consultation.id
+            );
+
+        };
+
         list.appendChild(item);
 
     });
@@ -33,22 +53,50 @@ loadConsultations();
 
 async function loadTimeline(id){
 
+    currentConsultationId = id;
+
     const response = await fetch(
 
         `/dashboard/consultations/${id}/timeline`
 
     );
 
-    const data = await response.json();
+    const timeline = await response.json();
 
-    console.log(data);
-
-}
-
-item.onclick = () => {
-
-    loadTimeline(
-        consultation.id
+    const chatBox = document.getElementById(
+        "chat-box"
     );
 
-};
+    chatBox.innerHTML = "";
+
+    timeline.forEach(item => {
+
+        const bubble = document.createElement("div");
+
+        if(item.type === "message"){
+
+            bubble.className =
+                item.sender === "user"
+                ? "bubble user"
+                : "bubble agent";
+
+            bubble.innerHTML = item.content;
+
+        }
+
+        else{
+
+            bubble.className = "activity";
+
+            bubble.innerHTML =
+                item.description;
+
+        }
+
+        chatBox.appendChild(
+            bubble
+        );
+
+    });
+
+}
