@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from dependencies import get_db
 from models import ConsultationDB
-from services.dashboard_service import get_waiting_consultations
+from services.dashboard_service import get_consultation_timeline, get_waiting_consultations
 from services.whatsapp_gateway import send_whatsapp_message
 from models import WhatsAppUserDB
 from pydantic import BaseModel
@@ -189,3 +189,34 @@ def finish_consultation_api(
     return {
         "success": True
     }
+
+@router.get(
+    "/consultations/{consultation_id}/timeline"
+)
+def consultation_timeline(
+
+    consultation_id: int,
+
+    db: Session = Depends(get_db)
+
+):
+
+    consultation = db.get(
+
+        ConsultationDB,
+
+        consultation_id
+
+    )
+
+    if consultation is None:
+
+        return {
+
+            "detail": "Consultation not found"
+
+        }
+
+    return get_consultation_timeline(
+        consultation
+    )
