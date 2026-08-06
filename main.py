@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from database import engine
 from models import Base
@@ -13,6 +14,9 @@ from routers.chat import router as agent_chat
 from routers.dashboard import router as dashboard_router
 
 app = FastAPI()
+app.mount("/dashboard-ui",
+    StaticFiles(directory="static/dashboard", html=True),
+    name="dashboard-ui")
 
 Base.metadata.create_all(bind=engine)
 
