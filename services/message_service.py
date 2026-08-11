@@ -47,10 +47,17 @@ def send_agent_reply(
 ):
     wa_account = consultation.user.whatsapp_accounts[0]
 
-    send_whatsapp_message(
+    print("=" * 40)
+    print("KIRIM KE WHATSAPP")
+    print("WA :", wa_account.wa_id)
+    print("ISI :", message)
+
+    result = send_whatsapp_message(
         wa_account.wa_id,
         message
     )
+
+    print("HASIL :", result)
 
     add_agent_message(
         db,

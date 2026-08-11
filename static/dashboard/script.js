@@ -1,4 +1,5 @@
 let currentConsultationId = null;
+let refreshInterval = null;
 
 async function loadConsultations() {
 
@@ -29,17 +30,20 @@ async function loadConsultations() {
 
             document.getElementById(
                 "customer-name"
-            ).innerText =
-                consultation.nama;
+            ).innerText = consultation.nama;
 
             document.getElementById(
                 "customer-instansi"
-            ).innerText =
-                consultation.instansi;
+            ).innerText = consultation.instansi;
+
+            currentConsultationId =
+                consultation.id;
 
             loadTimeline(
                 consultation.id
             );
+
+            startAutoRefresh();
 
         };
 
@@ -50,6 +54,11 @@ async function loadConsultations() {
 }
 
 loadConsultations();
+setInterval(() => {
+
+    loadConsultations();
+
+},5000);
 
 async function loadTimeline(id){
 
@@ -98,5 +107,85 @@ async function loadTimeline(id){
         );
 
     });
+
+}
+
+function startAutoRefresh(){
+
+    if(refreshInterval){
+
+        clearInterval(
+            refreshInterval
+        );
+
+    }
+
+    refreshInterval = setInterval(() => {
+
+        if(currentConsultationId){
+
+            loadTimeline(
+                currentConsultationId
+            );
+
+        }
+
+    },2000);
+
+}
+
+async function sendReply(){
+
+    if(currentConsultationId == null){
+
+        alert(
+            "Pilih konsultasi terlebih dahulu."
+        );
+
+        return;
+
+    }
+
+    const textarea =
+        document.getElementById(
+            "reply-message"
+        );
+
+    const message =
+        textarea.value.trim();
+
+    if(message === ""){
+
+        return;
+
+    }
+
+    await fetch(
+
+        `/dashboard/consultations/${currentConsultationId}/reply`,
+
+        {
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                message:message
+
+            })
+
+        }
+
+    );
+
+    textarea.value="";
+
+    loadTimeline(
+        currentConsultationId
+    );
 
 }

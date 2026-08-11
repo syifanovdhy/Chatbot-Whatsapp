@@ -27,10 +27,16 @@ function registerMessageHandler(client) {
             push_name: contact.pushname || "",
             message: message.body
         });
-
+        
         if (response && response.reply) {
             await message.reply(response.reply);
         }
+
+        // const contact = await message.getContact();
+
+        console.log(contact.id);
+        console.log(contact.number);
+        console.log(contact.pushname);
 
     });
 

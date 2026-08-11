@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from dependencies import get_db
 from models import ConsultationDB
-from services.dashboard_service import get_consultation_timeline, get_waiting_consultations
+from services.dashboard_service import get_consultation_timeline, get_waiting_consultations, get_service_statistics
 from services.whatsapp_gateway import send_whatsapp_message
 from models import WhatsAppUserDB
 from pydantic import BaseModel
@@ -14,6 +14,13 @@ router = APIRouter(
     prefix="/dashboard",
     tags=["Dashboard"]
 )
+
+@router.get("/statistics")
+def dashboard_statistics(
+    db: Session = Depends(get_db)
+):
+
+    return get_service_statistics(db)
 
 @router.get("/consultations")
 def dashboard_consultations(

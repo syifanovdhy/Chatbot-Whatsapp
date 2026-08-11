@@ -1,13 +1,28 @@
+from sqlalchemy.orm import Session
+
 from constants.states import MAIN_MENU
-from models import UserDB
+from models import MenuLogDB, UserDB
 
 def handle_main_menu(
+    db: Session,
     user: UserDB,
     message: str
 ):
 
     if user.registration_step != MAIN_MENU:
         return None
+
+    menu_name = get_menu_name(message)
+
+    if menu_name:
+
+        log = MenuLogDB(
+            user_id=user.id,
+            menu_type=menu_name
+        )
+
+        db.add(log)
+        db.commit()
 
     return process_menu_choice(message)
 

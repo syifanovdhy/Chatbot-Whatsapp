@@ -45,6 +45,7 @@ def process_chat(
         return reply
     
     reply = handle_main_menu(
+        db=db,
         user=user,
         message=message
     )

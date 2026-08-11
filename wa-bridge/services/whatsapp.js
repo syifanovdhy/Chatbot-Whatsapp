@@ -2,31 +2,73 @@ const { Client, LocalAuth } = require("whatsapp-web.js");
 const qrcode = require("qrcode-terminal");
 
 const client = new Client({
+
     authStrategy: new LocalAuth({
         clientId: "pst-bot"
-    })
+    }),
+
+    puppeteer: {
+
+        headless: true,
+
+        args: [
+
+            "--no-sandbox",
+
+            "--disable-setuid-sandbox",
+
+            "--disable-dev-shm-usage"
+
+        ]
+
+    }
+
 });
 
-client.on("qr", (qr) => {
-    console.log("Silakan scan QR berikut:");
+client.on("qr", qr => {
 
-    qrcode.generate(qr, {
-        small: true
+    console.log("Scan QR");
+
+    qrcode.generate(qr,{
+        small:true
     });
+
 });
 
-client.on("ready", () => {
+client.on("ready",()=>{
+
     console.log("=================================");
-    console.log(" WhatsApp berhasil terhubung");
+    console.log("WhatsApp berhasil terhubung");
     console.log("=================================");
+
 });
 
-client.on("disconnected", (reason) => {
+client.on("loading_screen",(percent,msg)=>{
 
-    console.log("WhatsApp terputus");
+    console.log(percent,msg);
+
+});
+
+client.on("authenticated",()=>{
+
+    console.log("Authenticated");
+
+});
+
+client.on("auth_failure",(msg)=>{
+
+    console.log("Auth Failure");
+
+    console.log(msg);
+
+});
+
+client.on("disconnected",(reason)=>{
+
+    console.log("Disconnected");
 
     console.log(reason);
 
 });
 
-module.exports = client;
+module.exports=client;

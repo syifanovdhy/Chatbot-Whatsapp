@@ -1,13 +1,31 @@
+from sqlalchemy import func
 from sqlalchemy.orm import Session
-from models import (
-    ConsultationDB,
-    MessageDB,
-    ActivityLogDB
-)
-from constants.states import (
-    CONSULTATION_WAITING,
-    CONSULTATION_ACTIVE
-)
+from models import ConsultationDB, MessageDB, ActivityLogDB, MenuLogDB
+from constants.states import CONSULTATION_WAITING,CONSULTATION_ACTIVE
+
+
+def get_service_statistics(
+    db: Session
+):
+
+    result = (
+        db.query(
+            MenuLogDB.menu_type,
+            func.count(MenuLogDB.id).label("jumlah")
+        )
+        .group_by(
+            MenuLogDB.menu_type
+        )
+        .all()
+    )
+
+    return [
+        {
+            "menu": menu,
+            "jumlah": jumlah
+        }
+        for menu, jumlah in result
+    ]
 
 
 def get_waiting_consultations(
