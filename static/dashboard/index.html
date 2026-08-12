@@ -5,64 +5,82 @@
 
     <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Dashboard PST</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
 <body>
 
-<div class="container">
+    <header>
 
-    <aside id="sidebar">
+        <h1>Dashboard PST</h1>
 
-        <h2>Konsultasi</h2>
+        <p>
+            BPS Kabupaten Banggai Kepulauan
+        </p>
 
-        <div id="consultation-list"></div>
+    </header>
 
-    </aside>
 
     <main>
 
-        <div id="header">
+        <section class="summary">
 
-            <h2 id="customer-name">
-                Belum memilih konsultasi
+            <div class="card">
+
+                <h3>Total Pengguna</h3>
+
+                <p id="total-users">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Total Layanan</h3>
+
+                <p id="total-services">
+                    0
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section>
+
+            <h2>
+                Rekap Layanan
             </h2>
 
-            <p id="customer-instansi"></p>
+            <div
+                id="service-statistics"
+                class="service-list"
+            >
 
-        </div>
+                <!-- Data akan dimasukkan JavaScript -->
 
-        <div id="chat-box"></div>
+            </div>
 
-        <div id="bottom">
-
-            <textarea
-                id="reply-message"
-                placeholder="Balas..."
-            ></textarea>
-
-            <button onclick="sendReply()">
-
-                Kirim
-
-            </button>
-
-            <button id="finish-btn">
-
-                Selesai
-
-            </button>
-
-        </div>
+        </section>
 
     </main>
 
-</div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 
