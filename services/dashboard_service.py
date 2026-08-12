@@ -1,8 +1,15 @@
 from sqlalchemy import func
 from sqlalchemy.orm import Session
-from models import ConsultationDB, MessageDB, ActivityLogDB, MenuLogDB
+from models import ConsultationDB, MenuLogDB, UserDB
 from constants.states import CONSULTATION_WAITING,CONSULTATION_ACTIVE
 
+SERVICE_ORDER = [
+    ("PERPUSTAKAAN", "📚 Perpustakaan"),
+    ("KONSULTASI", "📞 Konsultasi Statistik"),
+    ("SILASTIK", "🛒 Penjualan Produk Statistik (Silastik)"),
+    ("ROMANTIK", "📋 Rekomendasi Statistik (Romantik)"),
+    ("PENGADUAN", "📢 Pengaduan")
+]
 
 def get_service_statistics(
     db: Session
@@ -19,14 +26,40 @@ def get_service_statistics(
         .all()
     )
 
+    counts = {
+        menu: jumlah
+        for menu, jumlah in result
+    }
+
     return [
         {
-            "menu": menu,
-            "jumlah": jumlah
+            "menu": menu_name,
+            "kode": menu_code,
+            "jumlah": counts.get(menu_code, 0)
         }
-        for menu, jumlah in result
+        for menu_code, menu_name in SERVICE_ORDER
     ]
 
+def get_dashboard_summary(
+    db: Session
+):
+
+    total_users = (
+        db.query(
+            func.count(UserDB.id)
+        ).scalar()
+    )
+
+    total_services = (
+        db.query(
+            func.count(MenuLogDB.id)
+        ).scalar()
+    )
+
+    return {
+        "total_users": total_users,
+        "total_services": total_services
+    }
 
 def get_waiting_consultations(
     db: Session
