@@ -13,10 +13,12 @@ async function loadStatistics() {
 
 loadStatistics();
 
-async function loadDashboard() {
+async function loadDashboard(
+    period = "all"
+) {
 
     const summaryResponse = await fetch(
-        "/dashboard/summary"
+        `/dashboard/summary?period=${period}`
     );
 
     const summary =
@@ -24,15 +26,17 @@ async function loadDashboard() {
 
     document.getElementById(
         "total-users"
-    ).innerText = summary.total_users;
+    ).innerText =
+        summary.total_users;
 
     document.getElementById(
         "total-services"
-    ).innerText = summary.total_services;
+    ).innerText =
+        summary.total_services;
 
 
     const statisticsResponse = await fetch(
-        "/dashboard/statistics"
+        `/dashboard/statistics?period=${period}`
     );
 
     const statistics =
@@ -41,9 +45,20 @@ async function loadDashboard() {
     renderServiceStatistics(
         statistics
     );
-
 }
 
+document.getElementById(
+    "period"
+).addEventListener(
+    "change",
+    function () {
+
+        loadDashboard(
+            this.value
+        );
+
+    }
+);
 
 loadDashboard();
 

@@ -6,6 +6,7 @@ from services.dashboard_service import get_consultation_timeline, get_waiting_co
 from services.whatsapp_gateway import send_whatsapp_message
 from models import WhatsAppUserDB
 from pydantic import BaseModel
+from fastapi import Query
 
 class ReplyRequest(BaseModel):
     message: str
@@ -17,17 +18,31 @@ router = APIRouter(
 
 @router.get("/statistics")
 def dashboard_statistics(
+    period: str = Query(
+        "all",
+        pattern="^(all|today|week|month)$"
+    ),
     db: Session = Depends(get_db)
 ):
 
-    return get_service_statistics(db)
+    return get_service_statistics(
+        db=db,
+        period=period
+    )
 
 @router.get("/summary")
 def dashboard_summary(
+    period: str = Query(
+        "all",
+        pattern="^(all|today|week|month)$"
+    ),
     db: Session = Depends(get_db)
 ):
 
-    return get_dashboard_summary(db)
+    return get_dashboard_summary(
+        db=db,
+        period=period
+    )
 
 @router.get("/consultations")
 def dashboard_consultations(

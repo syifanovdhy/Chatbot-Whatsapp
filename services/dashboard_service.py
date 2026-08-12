@@ -2,6 +2,8 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 from models import ConsultationDB, MenuLogDB, UserDB
 from constants.states import CONSULTATION_WAITING,CONSULTATION_ACTIVE
+from datetime import datetime, timedelta
+from constants.dashboard import PERIOD_ALL, PERIOD_TODAY, PERIOD_WEEK, PERIOD_MONTH
 
 SERVICE_ORDER = [
     ("PERPUSTAKAAN", "📚 Perpustakaan"),
@@ -11,18 +13,62 @@ SERVICE_ORDER = [
     ("PENGADUAN", "📢 Pengaduan")
 ]
 
-def get_service_statistics(
-    db: Session
+def get_period_start(
+    period: str
 ):
 
+    now = datetime.utcnow()
+
+    if period == PERIOD_TODAY:
+
+        return datetime(
+            now.year,
+            now.month,
+            now.day
+        )
+
+    if period == PERIOD_WEEK:
+
+        return (
+            datetime(
+                now.year,
+                now.month,
+                now.day
+            )
+            - timedelta(days=now.weekday())
+        )
+
+    if period == PERIOD_MONTH:
+
+        return datetime(
+            now.year,
+            now.month,
+            1
+        )
+
+    return None
+
+def get_service_statistics(
+    db: Session,
+    period: str = "all"
+):
+
+    query = db.query(
+        MenuLogDB.menu_type,
+        func.count(MenuLogDB.id).label("jumlah")
+    )
+
+    period_start = get_period_start(period)
+
+    if period_start is not None:
+
+        query = query.filter(
+            MenuLogDB.created_at >= period_start
+        )
+
     result = (
-        db.query(
-            MenuLogDB.menu_type,
-            func.count(MenuLogDB.id).label("jumlah")
-        )
-        .group_by(
-            MenuLogDB.menu_type
-        )
+        query
+        .group_by(MenuLogDB.menu_type)
         .all()
     )
 
@@ -35,32 +81,43 @@ def get_service_statistics(
         {
             "menu": menu_name,
             "kode": menu_code,
-            "jumlah": counts.get(menu_code, 0)
+            "jumlah": counts.get(
+                menu_code,
+                0
+            )
         }
         for menu_code, menu_name in SERVICE_ORDER
     ]
 
 def get_dashboard_summary(
-    db: Session
+    db: Session,
+    period: str = "all"
 ):
 
-    total_users = (
-        db.query(
-            func.count(UserDB.id)
-        ).scalar()
+    period_start = get_period_start(period)
+
+    user_query = db.query(
+        func.count(UserDB.id)
     )
 
-    total_services = (
-        db.query(
-            func.count(MenuLogDB.id)
-        ).scalar()
+    service_query = db.query(
+        func.count(MenuLogDB.id)
     )
+
+    if period_start is not None:
+
+        service_query = service_query.filter(
+            MenuLogDB.created_at >= period_start
+        )
+
+    total_users = user_query.scalar()
+
+    total_services = service_query.scalar()
 
     return {
         "total_users": total_users,
         "total_services": total_services
     }
-
 def get_waiting_consultations(
     db: Session
 ):
