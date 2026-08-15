@@ -7,6 +7,13 @@ from services.whatsapp_gateway import send_whatsapp_message
 from models import WhatsAppUserDB
 from pydantic import BaseModel
 from fastapi import Query
+import os
+from datetime import datetime
+from fastapi.responses import FileResponse
+from starlette.background import BackgroundTask
+from services.dashboard_export_service import (
+    create_service_export
+)
 
 class ReplyRequest(BaseModel):
     message: str
@@ -249,6 +256,7 @@ def consultation_timeline(
     return get_consultation_timeline(
         consultation
     )
+
 @router.get("/daily-statistics")
 def dashboard_daily_statistics(
     period: str = Query(
@@ -262,4 +270,52 @@ def dashboard_daily_statistics(
         db=db,
         period=period
     )
+
+@router.get("/export")
+def export_service_report(
+    period: str = Query(
+        "month",
+        pattern="^(all|today|week|month)$"
+    ),
+    db: Session = Depends(get_db)
+):
+
+    timestamp = datetime.now().strftime(
+        "%Y%m%d_%H%M%S"
+    )
+
+    filename = (
+        f"rekap_layanan_{period}_"
+        f"{timestamp}.csv"
+    )
+
+    output_path = os.path.join(
+        "temp",
+        filename
+    )
+
+    os.makedirs(
+        "temp",
+        exist_ok=True
+    )
+
+    create_service_export(
+        db=db,
+        period=period,
+        output_path=output_path
+    )
+
+    return FileResponse(
+        path=output_path,
+        filename=filename,
+        media_type=(
+            "application/vnd.openxmlformats-officedocument."
+            "spreadsheetml.sheet"
+        ),
+        background=BackgroundTask(
+            os.remove,
+            output_path
+        )
+    )
+
 

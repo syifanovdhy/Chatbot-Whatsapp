@@ -301,3 +301,16 @@ function renderDailyChart(data) {
 
     });
 }
+
+function exportReport() {
+
+    const period =
+        document.getElementById(
+            "period"
+        ).value;
+
+    window.location.href =
+        `/dashboard/export?period=${period}`;
+}
+
+

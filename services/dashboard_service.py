@@ -212,3 +212,42 @@ def get_daily_service_statistics(
         }
         for tanggal, jumlah in result
     ]
+
+def get_daily_service_breakdown(
+    db: Session,
+    period: str = "month"
+):
+    period_start = get_period_start(period)
+
+    query = db.query(
+        func.date(MenuLogDB.created_at).label("tanggal"),
+        MenuLogDB.menu_type,
+        func.count(MenuLogDB.id).label("jumlah")
+    )
+
+    if period_start is not None:
+        query = query.filter(
+            MenuLogDB.created_at >= period_start
+        )
+
+    result = (
+        query
+        .group_by(
+            func.date(MenuLogDB.created_at),
+            MenuLogDB.menu_type
+        )
+        .order_by(
+            func.date(MenuLogDB.created_at)
+        )
+        .all()
+    )
+
+    return [
+        {
+            "tanggal": str(tanggal),
+            "menu": menu,
+            "jumlah": jumlah
+        }
+        for tanggal, menu, jumlah in result
+    ]
+
