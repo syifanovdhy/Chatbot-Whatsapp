@@ -1,3 +1,5 @@
+let serviceChart = null;
+
 async function loadStatistics() {
 
     const response = await fetch(
@@ -43,6 +45,10 @@ async function loadDashboard(
         await statisticsResponse.json();
 
     renderServiceStatistics(
+        statistics
+    );
+
+    renderServiceChart(
         statistics
     );
 }
@@ -92,6 +98,100 @@ function renderServiceStatistics(
         `;
 
         container.appendChild(row);
+
+    });
+}
+
+function renderServiceChart(statistics) {
+
+    const canvas =
+        document.getElementById("service-chart");
+
+    const labels = statistics.map(item => {
+
+        switch (item.kode) {
+
+            case "PERPUSTAKAAN":
+                return "Perpustakaan";
+
+            case "KONSULTASI":
+                return "Konsultasi";
+
+            case "SILASTIK":
+                return "Silastik";
+
+            case "ROMANTIK":
+                return "Romantik";
+
+            case "PENGADUAN":
+                return "Pengaduan";
+
+            default:
+                return item.menu;
+        }
+
+    });
+
+    const values = statistics.map(
+        item => item.jumlah
+    );
+
+    if (serviceChart) {
+        serviceChart.destroy();
+    }
+
+    serviceChart = new Chart(canvas, {
+
+        type: "bar",
+
+        data: {
+
+            labels: labels,
+
+            datasets: [
+                {
+                    label: "Jumlah Layanan",
+
+                    data: values
+                }
+            ]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            scales: {
+
+                x: {
+                    ticks: {
+                        maxRotation: 0,
+                        minRotation: 0
+                    }
+                },
+
+                y: {
+                    beginAtZero: true,
+
+                    ticks: {
+                        precision: 0
+                    }
+                }
+
+            },
+
+            plugins: {
+
+                legend: {
+                    display: false
+                }
+
+            }
+
+        }
 
     });
 }

@@ -93,31 +93,31 @@ def get_dashboard_summary(
     db: Session,
     period: str = "all"
 ):
-
     period_start = get_period_start(period)
 
-    user_query = db.query(
-        func.count(UserDB.id)
-    )
-
-    service_query = db.query(
-        func.count(MenuLogDB.id)
-    )
+    service_query = db.query(MenuLogDB)
 
     if period_start is not None:
-
         service_query = service_query.filter(
             MenuLogDB.created_at >= period_start
         )
 
-    total_users = user_query.scalar()
+    total_services = service_query.count()
 
-    total_services = service_query.scalar()
+    user_ids = (
+        service_query
+        .with_entities(MenuLogDB.user_id)
+        .distinct()
+        .all()
+    )
+
+    total_users = len(user_ids)
 
     return {
         "total_users": total_users,
         "total_services": total_services
     }
+
 def get_waiting_consultations(
     db: Session
 ):
