@@ -15,9 +15,7 @@ async function loadStatistics() {
 
 loadStatistics();
 
-async function loadDashboard(
-    period = "all"
-) {
+async function loadDashboard(period = "all") {
 
     const summaryResponse = await fetch(
         `/dashboard/summary?period=${period}`
@@ -51,6 +49,8 @@ async function loadDashboard(
     renderServiceChart(
         statistics
     );
+
+    updateLastUpdated();
 }
 
 document.getElementById(
@@ -67,6 +67,17 @@ document.getElementById(
 );
 
 loadDashboard();
+
+setInterval(() => {
+
+    const period =
+        document.getElementById(
+            "period"
+        ).value;
+
+    loadDashboard(period);
+
+}, 60000);
 
 function renderServiceStatistics(
     statistics
@@ -194,4 +205,19 @@ function renderServiceChart(statistics) {
         }
 
     });
+}
+
+function updateLastUpdated() {
+
+    const now = new Date();
+
+    document.getElementById(
+        "last-updated"
+    ).innerText = now.toLocaleString(
+        "id-ID",
+        {
+            dateStyle: "medium",
+            timeStyle: "short"
+        }
+    );
 }

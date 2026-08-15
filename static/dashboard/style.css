@@ -93,3 +93,10 @@ main {
     position: relative;
     height: 350px;
 }
+
+.dashboard-info {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #777;
+    font-size: 14px;
+}
