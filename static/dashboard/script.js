@@ -1,4 +1,5 @@
 let serviceChart = null;
+let dailyChart = null;
 
 async function loadStatistics() {
 
@@ -11,8 +12,6 @@ async function loadStatistics() {
     console.log(data);
 
 }
-
-
 loadStatistics();
 
 async function loadDashboard(period = "all") {
@@ -48,6 +47,17 @@ async function loadDashboard(period = "all") {
 
     renderServiceChart(
         statistics
+    );
+
+    const dailyResponse = await fetch(
+        `/dashboard/daily-statistics?period=${period}`
+    );
+
+    const dailyData =
+        await dailyResponse.json();
+
+    renderDailyChart(
+        dailyData
     );
 
     updateLastUpdated();
@@ -220,4 +230,74 @@ function updateLastUpdated() {
             timeStyle: "short"
         }
     );
+}
+
+function renderDailyChart(data) {
+
+    const canvas =
+        document.getElementById("daily-chart");
+
+    const labels = data.map(
+        item => item.tanggal
+    );
+
+    const values = data.map(
+        item => item.jumlah
+    );
+
+    if (dailyChart) {
+        dailyChart.destroy();
+    }
+
+    dailyChart = new Chart(canvas, {
+
+        type: "line",
+
+        data: {
+
+            labels: labels,
+
+            datasets: [
+                {
+                    label: "Jumlah Layanan",
+                    data: values,
+                    tension: 0.3
+                }
+            ]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            scales: {
+
+                y: {
+                    beginAtZero: true,
+
+                    ticks: {
+                        precision: 0
+                    }
+                },
+
+                x: {
+
+                    ticks: {
+
+                        maxRotation: 0,
+
+                        minRotation: 0
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
 }

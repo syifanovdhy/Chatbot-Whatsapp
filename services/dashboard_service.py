@@ -177,3 +177,38 @@ def get_consultation_timeline(
     )
 
     return timeline
+
+def get_daily_service_statistics(
+    db: Session,
+    period: str = "month"
+):
+    period_start = get_period_start(period)
+
+    query = db.query(
+        func.date(MenuLogDB.created_at).label("tanggal"),
+        func.count(MenuLogDB.id).label("jumlah")
+    )
+
+    if period_start is not None:
+        query = query.filter(
+            MenuLogDB.created_at >= period_start
+        )
+
+    result = (
+        query
+        .group_by(
+            func.date(MenuLogDB.created_at)
+        )
+        .order_by(
+            func.date(MenuLogDB.created_at)
+        )
+        .all()
+    )
+
+    return [
+        {
+            "tanggal": str(tanggal),
+            "jumlah": jumlah
+        }
+        for tanggal, jumlah in result
+    ]
