@@ -2,6 +2,7 @@
 <html lang="id">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,81 +10,141 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Dashboard PST</title>
+    <title>STATARA Dashboard</title>
 
     <link
         rel="stylesheet"
         href="style.css"
     >
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
+
 </head>
 
 <body>
 
-    <header>
-        <h1>Dashboard PST</h1>
+    <header class="topbar">
 
-        <p>
-            Pelayanan Statistik Terpadu
+        <div class="brand">
+
+            <div class="brand-title">
+                STATARA
+            </div>
+
+            <div class="brand-subtitle">
+                Statistik Tanggap dan Ramah
+            </div>
+
+        </div>
+
+        <div class="institution">
+
             BPS Kabupaten Banggai Kepulauan
-        </p>
+
+        </div>
+
     </header>
 
 
-    <main>
-        <section class="filter">
+    <main class="dashboard-container">
 
-            <label for="period">
-                Periode:
-            </label>
+        <!-- FILTER -->
 
-            <select id="period">
+        <section class="toolbar">
 
-                <option value="all">
-                    Semua
-                </option>
+            <div class="period-filter">
 
-                <option value="today">
-                    Hari Ini
-                </option>
+                <label for="period">
+                    Periode
+                </label>
 
-                <option value="week">
-                    Minggu Ini
-                </option>
+                <select id="period">
 
-                <option value="month">
-                    Bulan Ini
-                </option>
+                    <option value="all">
+                        Semua
+                    </option>
 
-            </select>
+                    <option value="today">
+                        Hari Ini
+                    </option>
+
+                    <option value="week">
+                        Minggu Ini
+                    </option>
+
+                    <option value="month">
+                        Bulan Ini
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="last-updated">
+
+                Terakhir diperbarui:
+                <span id="last-updated">
+                    -
+                </span>
+
+            </div>
 
         </section>
 
-        <div class="dashboard-info">
-            Terakhir diperbarui:
-            <span id="last-updated">-</span>
-        </div>
+
+        <!-- SUMMARY -->
 
         <section class="statistics">
 
-            <div class="card">
-                <h3>Total Pengguna</h3>
-                <p id="total-users">0</p>
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Total Pengguna
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="total-users"
+                >
+                    0
+                </div>
+
             </div>
 
-            <div class="card">
-                <h3>Total Layanan</h3>
-                <p id="total-services">0</p>
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Total Layanan
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="total-services"
+                >
+                    0
+                </div>
+
             </div>
 
         </section>
 
 
-        <section class="services">
+        <!-- SERVICE SUMMARY -->
 
-            <div class="section-header">
+        <section class="panel">
 
-                <h2>Rekap Layanan</h2>
+            <div class="panel-header">
+
+                <div>
+                    <h2>Rekap Layanan</h2>
+
+                    <p>
+                        Penggunaan layanan PST berdasarkan periode
+                    </p>
+                </div>
 
                 <button
                     id="export-btn"
@@ -94,28 +155,72 @@
 
             </div>
 
-            <div id="service-list">
+
+            <div
+                id="service-list"
+                class="service-list"
+            >
+
                 <p>Memuat data...</p>
+
             </div>
 
         </section>
 
-        <section class="chart-section">
 
-            <h2>Grafik Penggunaan Layanan</h2>
+        <!-- SERVICE CHART -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>
+                        Penggunaan Layanan
+                    </h2>
+
+                    <p>
+                        Perbandingan jumlah penggunaan setiap layanan
+                    </p>
+                </div>
+
+            </div>
 
             <div class="chart-container">
-                <canvas id="service-chart"></canvas>
+
+                <canvas
+                    id="service-chart"
+                ></canvas>
+
             </div>
 
         </section>
 
-        <section class="chart-section">
 
-            <h2>Tren Penggunaan Layanan</h2>
+        <!-- TREND CHART -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>
+                        Tren Penggunaan Layanan
+                    </h2>
+
+                    <p>
+                        Jumlah aktivitas layanan dari waktu ke waktu
+                    </p>
+                </div>
+
+            </div>
 
             <div class="chart-container">
-                <canvas id="daily-chart"></canvas>
+
+                <canvas
+                    id="daily-chart"
+                ></canvas>
+
             </div>
 
         </section>
