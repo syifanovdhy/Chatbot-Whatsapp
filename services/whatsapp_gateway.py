@@ -1,6 +1,6 @@
 import requests
 
-NODE_URL = "http://127.0.0.1:3000"
+from config import NODE_URL
 
 
 def send_whatsapp_message(
@@ -16,5 +16,7 @@ def send_whatsapp_message(
         },
         timeout=10
     )
+
+    response.raise_for_status()
 
     return response.json()

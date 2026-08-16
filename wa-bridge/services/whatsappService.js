@@ -1,3 +1,25 @@
+const automatedMessages = new Set();
+
+function messageKey(waId, message) {
+    return `${waId}|${message}`;
+}
+
+function markAutomatedMessage(waId, message) {
+    const key = messageKey(waId, message);
+    automatedMessages.add(key);
+    setTimeout(() => automatedMessages.delete(key), 60_000);
+}
+
+function isAutomatedMessage(waId, message) {
+    const key = messageKey(waId, message);
+    if (!automatedMessages.has(key)) {
+        return false;
+    }
+
+    automatedMessages.delete(key);
+    return true;
+}
+
 async function sendWhatsAppMessage(
     client,
     waId,
@@ -14,6 +36,8 @@ async function sendWhatsAppMessage(
 
             return false;
         }
+
+        markAutomatedMessage(waId, message);
 
         await client.sendMessage(
             waId,
@@ -35,5 +59,6 @@ async function sendWhatsAppMessage(
 }
 
 module.exports = {
-    sendWhatsAppMessage
+    sendWhatsAppMessage,
+    isAutomatedMessage,
 };

@@ -1,4 +1,11 @@
-const { sendMessageToBackend } = require("./api");
+const {
+    sendMessageToBackend,
+    sendDirectAgentReplyToBackend,
+} = require("./api");
+const {
+    sendWhatsAppMessage,
+    isAutomatedMessage,
+} = require("./whatsappService");
 
 function registerMessageHandler(client) {
 
@@ -29,7 +36,11 @@ function registerMessageHandler(client) {
         });
         
         if (response && response.reply) {
-            await message.reply(response.reply);
+            await sendWhatsAppMessage(
+                client,
+                message.from,
+                response.reply
+            );
         }
 
         // const contact = await message.getContact();
@@ -38,6 +49,27 @@ function registerMessageHandler(client) {
         console.log(contact.number);
         console.log(contact.pushname);
 
+    });
+
+    client.on("message_create", async (message) => {
+
+        if (!message.fromMe || !message.body) {
+            return;
+        }
+
+        // Pesan yang dikirim API bot tidak boleh dicatat sebagai balasan petugas.
+        if (isAutomatedMessage(message.to, message.body)) {
+            return;
+        }
+
+        const response = await sendDirectAgentReplyToBackend({
+            wa_id: message.to,
+            message: message.body,
+        });
+
+        if (response && response.recorded) {
+            console.log("Balasan petugas langsung dicatat:", response.consultation_id);
+        }
     });
 
 }

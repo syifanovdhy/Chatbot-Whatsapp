@@ -21,6 +21,20 @@ async function sendMessageToBackend(payload) {
     }
 }
 
+async function sendDirectAgentReplyToBackend(payload) {
+    try {
+        const response = await axios.post(
+            `${FASTAPI_URL}/agent/direct-reply`,
+            payload
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error recording direct agent reply:", error.message);
+        return null;
+    }
+}
+
 module.exports = { 
-    sendMessageToBackend 
+    sendMessageToBackend,
+    sendDirectAgentReplyToBackend,
 };

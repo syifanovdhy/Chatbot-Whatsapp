@@ -10,12 +10,12 @@ from constants.states import (
     MAIN_MENU,
     WAITING_CONSULTATION,
     WAITING_AGENT,
-    CONSULTATION_FINISHED
+    CONSULTATION_FINISHED,
+    CONSULTATION_ACTIVE
 )
 from services.activity_services import add_activity
 from services.menu_service import get_main_menu
 from services.timeout_service import start_timeout
-from services.whatsapp_gateway import send_whatsapp_message
 
 def handle_consultation(
     db: Session,
@@ -62,7 +62,7 @@ def handle_consultation(
 
         first_message = MessageDB(
             consultation_id=consultation.id,
-            sender="SENDER_USER",
+            sender=SENDER_USER,
             content=message
         )
 
@@ -102,10 +102,15 @@ def handle_consultation(
             message=message
         )
 
-    return (
-        "📩 Pesan Anda telah ditambahkan ke konsultasi yang sedang berlangsung.\n\n"
-        "Petugas PST akan segera membalas."
-    )
+        if not consultation.agent_replied:
+            return (
+                "📩 Pesan Anda telah ditambahkan ke konsultasi yang sedang berlangsung.\n\n"
+                "Petugas PST akan segera membalas."
+            )
+
+        return None
+
+    return None
 
 def save_user_message(
     db: Session,
@@ -138,9 +143,14 @@ def get_active_consultation(
         db.query(ConsultationDB)
         .filter(
             ConsultationDB.user_id == user_id,
-            ConsultationDB.status == CONSULTATION_WAITING
+            ConsultationDB.status.in_([
+                CONSULTATION_WAITING,
+                CONSULTATION_ACTIVE
+            ])
         )
-        .order_by(ConsultationDB.started_at.desc())
+        .order_by(
+            ConsultationDB.started_at.desc()
+        )
         .first()
     )
 
@@ -160,18 +170,3 @@ def finish_consultation(
     consultation.user.status = BOT_MODE
     consultation.user.registration_step = MAIN_MENU
     db.commit()
-
-    wa = consultation.user.whatsapp_accounts[0]
-    send_whatsapp_message(
-        wa.wa_id,
-        (
-            "✅ Konsultasi telah selesai.\n\n"
-            "Terima kasih telah menggunakan "
-            "Pelayanan Statistik Terpadu "
-            "BPS Kabupaten Banggai Kepulauan.\n\n"
-            "Apabila membutuhkan layanan lain,"
-            " silakan ketik *0* untuk kembali "
-            "ke menu utama."
-        )
-    )
-    

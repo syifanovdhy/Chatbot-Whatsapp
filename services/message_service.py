@@ -40,6 +40,23 @@ def add_agent_message(
         description="Petugas membalas"
     )
 
+
+def record_agent_reply(
+    db: Session,
+    consultation: ConsultationDB,
+    message: str,
+):
+    add_agent_message(
+        db=db,
+        consultation=consultation,
+        message=message,
+    )
+
+    consultation.agent_replied = True
+    consultation.status = CONSULTATION_ACTIVE
+    consultation.user.status = AGENT_MODE
+    db.commit()
+
 def send_agent_reply(
     db: Session,
     consultation: ConsultationDB,
@@ -59,16 +76,10 @@ def send_agent_reply(
 
     print("HASIL :", result)
 
-    add_agent_message(
-        db,
-        consultation,
-        message
+    record_agent_reply(
+        db=db,
+        consultation=consultation,
+        message=message,
     )
-
-    consultation.agent_replied = True
-    consultation.status = CONSULTATION_ACTIVE
-    consultation.user.status = AGENT_MODE
-
-    db.commit()
 
     return True

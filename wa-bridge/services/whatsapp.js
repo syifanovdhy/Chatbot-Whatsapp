@@ -1,10 +1,16 @@
-const { Client, LocalAuth } = require("whatsapp-web.js");
-const qrcode = require("qrcode-terminal");
+const { Client, LocalAuth } =
+    require("whatsapp-web.js");
+
+const qrcode =
+    require("qrcode-terminal");
+
+const CLIENT_ID =
+    process.env.CLIENT_ID || "pst-bot";
 
 const client = new Client({
 
     authStrategy: new LocalAuth({
-        clientId: "pst-bot"
+        clientId: CLIENT_ID
     }),
 
     puppeteer: {
@@ -12,13 +18,9 @@ const client = new Client({
         headless: true,
 
         args: [
-
             "--no-sandbox",
-
             "--disable-setuid-sandbox",
-
             "--disable-dev-shm-usage"
-
         ]
 
     }
@@ -29,46 +31,44 @@ client.on("qr", qr => {
 
     console.log("Scan QR");
 
-    qrcode.generate(qr,{
-        small:true
+    qrcode.generate(qr, {
+        small: true
     });
 
 });
 
-client.on("ready",()=>{
+client.on("ready", () => {
 
     console.log("=================================");
-    console.log("WhatsApp berhasil terhubung");
+    console.log(" WhatsApp berhasil terhubung");
     console.log("=================================");
 
 });
 
-client.on("loading_screen",(percent,msg)=>{
+client.on("loading_screen", (percent, msg) => {
 
-    console.log(percent,msg);
+    console.log(percent, msg);
 
 });
 
-client.on("authenticated",()=>{
+client.on("authenticated", () => {
 
     console.log("Authenticated");
 
 });
 
-client.on("auth_failure",(msg)=>{
+client.on("auth_failure", msg => {
 
     console.log("Auth Failure");
-
     console.log(msg);
 
 });
 
-client.on("disconnected",(reason)=>{
+client.on("disconnected", reason => {
 
     console.log("Disconnected");
-
     console.log(reason);
 
 });
 
-module.exports=client;
+module.exports = client;

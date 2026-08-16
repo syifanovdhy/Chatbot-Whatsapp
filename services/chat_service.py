@@ -13,12 +13,24 @@ def process_chat(
     wa_id: str,
     push_name: str
 ):
+
     user = get_or_create_user(
         db=db,
         wa_id=wa_id,
         push_name=push_name
     )
 
+    # Perintah global
+    reply = handle_global_command(
+        db=db,
+        user=user,
+        message=message
+    )
+
+    if reply:
+        return reply
+
+    # Mode petugas
     if user.status == AGENT_MODE:
 
         return handle_agent_mode(
@@ -26,14 +38,6 @@ def process_chat(
             user=user,
             message=message
         )
-
-    # print("=================================")
-    # print("User ID   :", user.id)
-    # print("WA Name   :", user.whatsapp_accounts[0].push_name)
-    # print("Nama PST  :", user.nama)
-    # print("Step      :", user.registration_step)
-    # print("Message   :", message)
-    # print("=================================")
 
     reply = handle_registration(
         db=db,
@@ -43,7 +47,7 @@ def process_chat(
 
     if reply:
         return reply
-    
+
     reply = handle_main_menu(
         db=db,
         user=user,
@@ -52,7 +56,7 @@ def process_chat(
 
     if reply:
         return reply
-    
+
     reply = handle_consultation(
         db=db,
         user=user,
@@ -62,16 +66,7 @@ def process_chat(
     if reply:
         return reply
 
-    reply = handle_global_command(
-    db=db,
-    user=user,
-    message=message
-)
-
-    if reply:
-        return reply
-
     return (
-    "Maaf, saya belum memahami pesan tersebut.\n\n"
-    "Ketik *0* untuk kembali ke menu utama."
+        "Maaf, saya belum memahami pesan tersebut.\n\n"
+        "Ketik *0* untuk kembali ke menu utama."
     )
