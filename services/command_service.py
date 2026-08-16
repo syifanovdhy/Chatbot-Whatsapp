@@ -38,10 +38,17 @@ def handle_global_command(
             return "Permintaan konsultasi dibatalkan.\n\n" + get_main_menu()
 
         if user.registration_step == WAITING_AGENT:
+            consultation = get_active_consultation(db=db, user_id=user.id)
+            if consultation is not None and not consultation.agent_replied:
+                finish_consultation(db=db, consultation=consultation)
+                return (
+                    "Permintaan konsultasi dibatalkan.\n\n"
+                    + get_main_menu()
+                )
+
             return (
-                "Konsultasi sudah dikirim ke petugas.\n\n"
-                "Silakan tunggu balasan petugas atau ketik *selesai* "
-                "jika ingin mengakhiri konsultasi."
+                "Petugas sudah membalas konsultasi Anda.\n\n"
+                "Ketik *selesai* jika ingin mengakhiri konsultasi."
             )
 
     return None

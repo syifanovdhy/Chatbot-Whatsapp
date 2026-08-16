@@ -4,8 +4,9 @@ from dependencies import get_db
 from sqlalchemy.orm import Session
 from models import UserDB, WhatsAppUserDB
 from schemas import user
-from services.consultation_service import get_active_consultation
+from services.consultation_service import finish_consultation, get_active_consultation
 from services.message_service import record_agent_reply
+from services.whatsapp_gateway import send_whatsapp_message
 
 router = APIRouter()
 
@@ -38,6 +39,19 @@ def record_direct_reply(
     )
     if consultation is None:
         return {"recorded": False, "reason": "no_active_consultation"}
+
+    if request.message.strip().lower() == "#selesai":
+        finish_consultation(db=db, consultation=consultation)
+        send_whatsapp_message(
+            request.wa_id,
+            (
+                "Konsultasi telah selesai.\n\n"
+                "Terima kasih telah menggunakan Pelayanan Statistik Terpadu "
+                "BPS Kabupaten Banggai Kepulauan.\n\n"
+                "Ketik *0* untuk kembali ke menu utama."
+            ),
+        )
+        return {"recorded": True, "finished": True, "consultation_id": consultation.id}
 
     record_agent_reply(
         db=db,

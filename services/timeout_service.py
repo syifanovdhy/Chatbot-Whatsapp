@@ -64,7 +64,7 @@ def timeout_worker(consultation_id: int):
             "Mohon maaf.\n\n"
             "Saat ini seluruh petugas PST sedang melayani pengguna lain.\n\n"
             "Mohon tunggu beberapa saat.\n\n"
-            "Jika ingin mengakhiri konsultasi, ketik *selesai*."
+            "Jika ingin membatalkan permintaan konsultasi, ketik *batal*."
         )
 
         for attempt in range(1, MAX_SEND_ATTEMPTS + 1):
