@@ -1,1 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment variables
 .env
+*.env
+
+# SQLite database
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary export files
+temp/
+
+# VS Code
+.vscode/
+
+# Node.js
+wa-bridge/node_modules/
+
+# WhatsApp Web.js session
+wa-bridge/.wwebjs_auth/
+wa-bridge/.wwebjs_cache/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
