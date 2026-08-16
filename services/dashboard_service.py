@@ -1,6 +1,6 @@
 from sqlalchemy import func
 from sqlalchemy.orm import Session
-from models import ConsultationDB, MenuLogDB, UserDB
+from models import ConsultationDB, MenuLogDB, MessageDB, UserDB
 from constants.states import CONSULTATION_WAITING,CONSULTATION_ACTIVE
 from datetime import datetime, timedelta
 from constants.dashboard import PERIOD_ALL, PERIOD_TODAY, PERIOD_WEEK, PERIOD_MONTH
@@ -117,6 +117,41 @@ def get_dashboard_summary(
         "total_users": total_users,
         "total_services": total_services
     }
+
+def get_active_consultations(db: Session):
+    consultations = (
+        db.query(ConsultationDB)
+        .filter(
+            ConsultationDB.status.in_([
+                CONSULTATION_WAITING,
+                CONSULTATION_ACTIVE,
+            ])
+        )
+        .order_by(ConsultationDB.started_at.desc())
+        .all()
+    )
+
+    result = []
+    for consultation in consultations:
+        whatsapp_account = next(iter(consultation.user.whatsapp_accounts), None)
+        last_message = (
+            db.query(MessageDB)
+            .filter(MessageDB.consultation_id == consultation.id)
+            .order_by(MessageDB.created_at.desc())
+            .first()
+        )
+        result.append({
+            "id": consultation.id,
+            "nama": consultation.user.nama or "Pengguna WhatsApp",
+            "wa_id": whatsapp_account.wa_id if whatsapp_account else "-",
+            "keperluan": consultation.keperluan,
+            "status": consultation.status,
+            "agent_replied": consultation.agent_replied,
+            "started_at": consultation.started_at.isoformat(),
+            "last_message": last_message.content if last_message else "-",
+        })
+
+    return result
 
 def get_daily_service_statistics(
     db: Session,

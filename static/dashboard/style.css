@@ -294,6 +294,78 @@ body {
 
 
 /* =========================
+   ACTIVE CONSULTATIONS
+========================= */
+
+.consultation-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.consultation-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 16px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 8px;
+}
+
+.consultation-details h3,
+.consultation-details p {
+
+    margin: 0;
+}
+
+.consultation-details p {
+
+    margin-top: 7px;
+}
+
+.consultation-meta,
+.consultation-last-message {
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+.finish-button {
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 10px 16px;
+
+    background: #dc2626;
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.finish-button:hover {
+
+    background: #b91c1c;
+}
+
+
+/* =========================
    CHART
 ========================= */
 
@@ -348,6 +420,13 @@ body {
         align-items: flex-start;
 
         gap: 15px;
+    }
+
+    .consultation-item {
+
+        flex-direction: column;
+
+        align-items: flex-start;
     }
 
     .chart-container {

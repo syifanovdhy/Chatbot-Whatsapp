@@ -33,7 +33,6 @@ async function loadDashboard(period = "all") {
     ).innerText =
         summary.total_services;
 
-
     const statisticsResponse = await fetch(
         `/dashboard/statistics?period=${period}`
     );
@@ -63,6 +62,85 @@ async function loadDashboard(period = "all") {
     updateLastUpdated();
 }
 
+async function loadActiveConsultations() {
+
+    const container = document.getElementById("active-consultations");
+
+    try {
+        const response = await fetch("/dashboard/consultations/active");
+        const consultations = await response.json();
+
+        container.innerHTML = "";
+
+        if (consultations.length === 0) {
+            container.innerText = "Tidak ada konsultasi aktif.";
+            return;
+        }
+
+        consultations.forEach(consultation => {
+            const item = document.createElement("article");
+            item.className = "consultation-item";
+
+            const details = document.createElement("div");
+            details.className = "consultation-details";
+
+            const title = document.createElement("h3");
+            title.innerText = consultation.nama;
+
+            const meta = document.createElement("p");
+            meta.className = "consultation-meta";
+            meta.innerText = `${consultation.wa_id} · ${consultation.agent_replied ? "Petugas sudah membalas" : "Menunggu petugas"}`;
+
+            const need = document.createElement("p");
+            need.innerText = `Keperluan: ${consultation.keperluan}`;
+
+            const lastMessage = document.createElement("p");
+            lastMessage.className = "consultation-last-message";
+            lastMessage.innerText = `Pesan terakhir: ${consultation.last_message}`;
+
+            details.append(title, meta, need, lastMessage);
+
+            const finishButton = document.createElement("button");
+            finishButton.className = "finish-button";
+            finishButton.innerText = "Selesai";
+            finishButton.addEventListener("click", () => finishConsultation(
+                consultation.id,
+                consultation.nama,
+            ));
+
+            item.append(details, finishButton);
+            container.appendChild(item);
+        });
+    } catch (error) {
+        container.innerText = "Gagal memuat konsultasi aktif.";
+        console.error(error);
+    }
+}
+
+async function finishConsultation(consultationId, userName) {
+
+    if (!confirm(`Akhiri konsultasi dengan ${userName}?`)) {
+        return;
+    }
+
+    const response = await fetch(
+        `/dashboard/consultations/${consultationId}/finish`,
+        { method: "POST" },
+    );
+
+    if (!response.ok) {
+        alert("Konsultasi gagal ditutup.");
+        return;
+    }
+
+    const result = await response.json();
+    if (!result.notification_sent) {
+        alert("Konsultasi ditutup, tetapi notifikasi WhatsApp gagal dikirim.");
+    }
+
+    loadDashboard(document.getElementById("period").value);
+}
+
 document.getElementById(
     "period"
 ).addEventListener(
@@ -76,6 +154,7 @@ document.getElementById(
     }
 );
 
+loadActiveConsultations();
 loadDashboard();
 
 setInterval(() => {
@@ -88,6 +167,8 @@ setInterval(() => {
     loadDashboard(period);
 
 }, 60000);
+
+setInterval(loadActiveConsultations, 60000);
 
 function renderServiceStatistics(
     statistics
@@ -124,6 +205,11 @@ function renderServiceStatistics(
 }
 
 function renderServiceChart(statistics) {
+
+    if (typeof Chart === "undefined") {
+        console.warn("Chart.js tidak tersedia; grafik layanan tidak ditampilkan.");
+        return;
+    }
 
     const canvas =
         document.getElementById("service-chart");
@@ -233,6 +319,11 @@ function updateLastUpdated() {
 }
 
 function renderDailyChart(data) {
+
+    if (typeof Chart === "undefined") {
+        console.warn("Chart.js tidak tersedia; grafik tren tidak ditampilkan.");
+        return;
+    }
 
     const canvas =
         document.getElementById("daily-chart");
