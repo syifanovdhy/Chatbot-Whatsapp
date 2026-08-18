@@ -17,6 +17,10 @@ const client = new Client({
 
         headless: true,
 
+        // Use the locally installed Chrome when Puppeteer's downloaded cache
+        // is unavailable (for example after this project is moved to a new PC).
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+
         args: [
             "--no-sandbox",
             "--disable-setuid-sandbox",
