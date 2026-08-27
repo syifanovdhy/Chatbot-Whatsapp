@@ -16,11 +16,11 @@ def get_stats(
     total_messages = db.query(MessageDB).count()
 
     logs = db.query(MenuLogDB).all()
+
     menu_stats = {
-        "PERPUSTAKAAN": 0,
+        "PUBLIKASI": 0,
         "KONSULTASI": 0,
-        "SILASTIK": 0,
-        "ROMANTIK": 0,
+        "DATA_STRATEGIS": 0,
         "PENGADUAN": 0
     }
 

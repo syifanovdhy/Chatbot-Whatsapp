@@ -6,10 +6,9 @@ from datetime import datetime, timedelta
 from constants.dashboard import PERIOD_ALL, PERIOD_TODAY, PERIOD_WEEK, PERIOD_MONTH
 
 SERVICE_ORDER = [
-    ("PERPUSTAKAAN", "📚 Perpustakaan"),
+    ("PUBLIKASI", "📚 Publikasi"),
     ("KONSULTASI", "📞 Konsultasi Statistik"),
-    ("SILASTIK", "🛒 Penjualan Produk Statistik (Silastik)"),
-    ("ROMANTIK", "📋 Rekomendasi Statistik (Romantik)"),
+    ("DATA_STRATEGIS", "📊 Data Strategis"),
     ("PENGADUAN", "📢 Pengaduan")
 ]
 

@@ -196,8 +196,8 @@ Ketik *Menu* atau *0* untuk kembali ke menu utama.
 
 MENU_MAPPING = {
     "1": "PUBLIKASI",
-    "2": "KONSULTASI STATISTIK",
-    "3": "DATA STRATEGIS",
+    "2": "KONSULTASI",
+    "3": "DATA_STRATEGIS",
     "4": "PENGADUAN"
 }
 

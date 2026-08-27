@@ -1,19 +1,6 @@
 let serviceChart = null;
 let dailyChart = null;
 
-async function loadStatistics() {
-
-    const response = await fetch(
-        "/dashboard/statistics"
-    );
-
-    const data = await response.json();
-
-    console.log(data);
-
-}
-loadStatistics();
-
 async function loadDashboard(period = "all") {
 
     const summaryResponse = await fetch(
@@ -36,6 +23,8 @@ async function loadDashboard(period = "all") {
     const statisticsResponse = await fetch(
         `/dashboard/statistics?period=${period}`
     );
+
+    console.log("STATUS STATISTICS:", statisticsResponse.status);
 
     const statistics =
         await statisticsResponse.json();
@@ -61,6 +50,7 @@ async function loadDashboard(period = "all") {
 
     updateLastUpdated();
 }
+
 
 async function loadActiveConsultations() {
 
@@ -170,9 +160,7 @@ setInterval(() => {
 
 setInterval(loadActiveConsultations, 60000);
 
-function renderServiceStatistics(
-    statistics
-) {
+function renderServiceStatistics(statistics) {
 
     const container =
         document.getElementById(
@@ -180,6 +168,15 @@ function renderServiceStatistics(
         );
 
     container.innerHTML = "";
+
+    if (!statistics || statistics.length === 0) {
+
+        container.innerHTML = `
+            <p>Tidak ada data layanan.</p>
+        `;
+
+        return;
+    }
 
     statistics.forEach(item => {
 
@@ -207,28 +204,29 @@ function renderServiceStatistics(
 function renderServiceChart(statistics) {
 
     if (typeof Chart === "undefined") {
-        console.warn("Chart.js tidak tersedia; grafik layanan tidak ditampilkan.");
+        console.warn(
+            "Chart.js tidak tersedia; grafik layanan tidak ditampilkan."
+        );
         return;
     }
 
     const canvas =
-        document.getElementById("service-chart");
+        document.getElementById(
+            "service-chart"
+        );
 
     const labels = statistics.map(item => {
 
         switch (item.kode) {
 
-            case "PERPUSTAKAAN":
-                return "Perpustakaan";
+            case "PUBLIKASI":
+                return "Publikasi";
 
             case "KONSULTASI":
-                return "Konsultasi";
+                return "Konsultasi Statistik";
 
-            case "SILASTIK":
-                return "Silastik";
-
-            case "ROMANTIK":
-                return "Romantik";
+            case "DATA_STRATEGIS":
+                return "Data Strategis";
 
             case "PENGADUAN":
                 return "Pengaduan";
@@ -258,7 +256,6 @@ function renderServiceChart(statistics) {
             datasets: [
                 {
                     label: "Jumlah Layanan",
-
                     data: values
                 }
             ]
@@ -302,6 +299,7 @@ function renderServiceChart(statistics) {
 
     });
 }
+
 
 function updateLastUpdated() {
 

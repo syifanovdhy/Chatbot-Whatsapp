@@ -39,7 +39,10 @@ def handle_global_command(
         if user.registration_step == WAITING_CONSULTATION:
             user.registration_step = MAIN_MENU
             db.commit()
-            return "Permintaan konsultasi dibatalkan.\n\n" + get_main_menu()
+            return ("Permintaan konsultasi dibatalkan.\n\n"
+                    "Semoga layanan kami dapat membantu kebutuhan data dan informasi Anda.\n\n"
+                    "Ketik *Menu* jika ingin menggunakan layanan STATARA kembali."
+                )
 
         if user.registration_step == WAITING_AGENT:
             consultation = get_active_consultation(db=db, user_id=user.id)
