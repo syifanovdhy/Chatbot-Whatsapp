@@ -12,87 +12,6 @@ DATA_CATEGORIES = {
     "D5": "Ketenagakerjaan",
     "D6": "Geografis",
 }
-
-D3_DATA = {
-    "2025": {
-        "status": "**",
-        "pdrb_adhb": "5.887,34",
-        "pdrb_adhk": "3.236,51",
-        "pertumbuhan": "4,23",
-    },
-    "2024": {
-        "status": "*",
-        "pdrb_adhb": "5.377,32",
-        "pdrb_adhk": "3.105,15",
-        "pdrb_per_kapita": "43,16",
-        "pertumbuhan": "4,03",
-    },
-    "2023": {
-        "status": "",
-        "pdrb_adhb": "4.929,03",
-        "pdrb_adhk": "2.984,81",
-        "pdrb_per_kapita": "39,94",
-        "pertumbuhan": "3,99",
-    },
-    "2022": {
-        "status": "",
-        "pdrb_adhb": "4.568,79",
-        "pdrb_adhk": "2.870,36",
-        "pdrb_per_kapita": "37,38",
-        "pertumbuhan": "4,94",
-    },
-    "2021": {
-        "status": "",
-        "pdrb_adhb": "4.130,12",
-        "pdrb_adhk": "2.735,24",
-        "pdrb_per_kapita": "34,12",
-        "pertumbuhan": "5,07",
-    },
-}
-
-def get_d3_detail():
-    response = """
-📊 *Data Perekonomian Kabupaten Banggai Kepulauan*
-
-"""
-
-    for year, data in D3_DATA.items():
-
-        response += f"Tahun {year}{data['status']}\n"
-
-        response += (
-            f"PDRB Harga Berlaku (Miliar Rupiah): "
-            f"{data['pdrb_adhb']}\n"
-        )
-
-        response += (
-            f"PDRB Harga Konstan (Miliar Rupiah): "
-            f"{data['pdrb_adhk']}\n"
-        )
-
-        response += (
-            f"Pertumbuhan Ekonomi (%): "
-            f"{data['pertumbuhan']}\n\n"
-        )
-
-    response += """
-*Catatan:
-2024: Angka sementara
-2025: Angka sangat sementara
-
-Sumber:
-BPS Kabupaten Banggai Kepulauan
-
-Untuk data PDRB yang lebih lengkap:
-https://tinyurl.com/bps-bangkep-pdrbl-2021-2025
-
-Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
-Ketik *Menu* untuk kembali ke menu awal.
-Ketik *Selesai* untuk mengakhiri percakapan.
-"""
-
-    return response
-
 D1_DATA = {
     "2025": {
             "jumlah_penduduk": " 131.682",
@@ -193,6 +112,125 @@ Ketik *Selesai* untuk mengakhiri percakapan.
 
     return response
 
+D3_DATA = {
+    "2025": {
+        "status": "**",
+        "pdrb_adhb": "5.887,34",
+        "pdrb_adhk": "3.236,51",
+        "pertumbuhan": "4,23",
+    },
+    "2024": {
+        "status": "*",
+        "pdrb_adhb": "5.377,32",
+        "pdrb_adhk": "3.105,15",
+        "pdrb_per_kapita": "43,16",
+        "pertumbuhan": "4,03",
+    },
+    "2023": {
+        "status": "",
+        "pdrb_adhb": "4.929,03",
+        "pdrb_adhk": "2.984,81",
+        "pdrb_per_kapita": "39,94",
+        "pertumbuhan": "3,99",
+    },
+    "2022": {
+        "status": "",
+        "pdrb_adhb": "4.568,79",
+        "pdrb_adhk": "2.870,36",
+        "pdrb_per_kapita": "37,38",
+        "pertumbuhan": "4,94",
+    },
+    "2021": {
+        "status": "",
+        "pdrb_adhb": "4.130,12",
+        "pdrb_adhk": "2.735,24",
+        "pdrb_per_kapita": "34,12",
+        "pertumbuhan": "5,07",
+    },
+}
+
+def get_d3_detail():
+    response = """
+📊 *Data Perekonomian Kabupaten Banggai Kepulauan*
+
+"""
+
+    for year, data in D3_DATA.items():
+
+        response += f"Tahun {year}{data['status']}\n"
+
+        response += (
+            f"PDRB Harga Berlaku (Miliar Rupiah): "
+            f"{data['pdrb_adhb']}\n"
+        )
+
+        response += (
+            f"PDRB Harga Konstan (Miliar Rupiah): "
+            f"{data['pdrb_adhk']}\n"
+        )
+
+        response += (
+            f"Pertumbuhan Ekonomi (%): "
+            f"{data['pertumbuhan']}\n\n"
+        )
+
+    response += """
+*Catatan:
+2024: Angka sementara
+2025: Angka sangat sementara
+
+Sumber:
+BPS Kabupaten Banggai Kepulauan
+
+Untuk data PDRB yang lebih lengkap:
+https://tinyurl.com/bps-bangkep-pdrbl-2021-2025
+
+Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
+Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Selesai* untuk mengakhiri percakapan.
+"""
+
+    return response
+
+D4_DATA = {
+    "2025": {
+        "ipm": "68,44",
+    },
+    "2024": {
+        "ipm": "67,65",
+    },
+    "2023": {
+        "ipm": "67,05",
+    },
+    "2022": {
+        "ipm": "66,30",
+    },
+    "2021": {
+        "ipm": "65,82",
+    },
+}
+
+def get_d4_detail():
+    response = """
+📊 *Indeks Pembangunan Manusia Kabupaten Banggai Kepulauan*
+
+"""
+
+    for year, data in D4_DATA.items():
+        response += f"""Tahun {year}
+IPM: {data['ipm']}
+
+"""
+
+    response += """Sumber:
+BPS Kabupaten Banggai Kepulauan
+
+Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
+Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Selesai* untuk mengakhiri percakapan.
+"""
+
+    return response
 
 def get_data_menu():
     return """
@@ -231,6 +269,9 @@ def get_data_detail(code: str):
 
     if code == "D3":
         return get_d3_detail()
+
+    if code == "D4":
+        return get_d4_detail()
 
     return f"""
 📊 *Data {DATA_CATEGORIES[code]}*
