@@ -279,6 +279,34 @@ Ketik *Selesai* untuk mengakhiri percakapan.
 
     return response
 
+D6_DATA = {
+    "luas_wilayah": "2.488,79 km²",
+    "jumlah_kecamatan": "12",
+    "jumlah_desa_kelurahan": "144",
+}
+
+def get_d6_detail():
+    response = """
+📊 *Data Geografis Kabupaten Banggai Kepulauan*
+
+Luas Wilayah: {luas} 
+Jumlah Kecamatan: {kecamatan}
+Jumlah Desa/Kelurahan: {desa}
+
+Sumber:
+BPS Kabupaten Banggai Kepulauan
+
+Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
+Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Selesai* untuk mengakhiri percakapan.
+""".format(
+        luas=D6_DATA["luas_wilayah"],
+        kecamatan=D6_DATA["jumlah_kecamatan"],
+        desa=D6_DATA["jumlah_desa_kelurahan"],
+    )
+
+    return response
+
 def get_data_menu():
     return """
 📊 *Data Strategis Kabupaten Banggai Kepulauan*
@@ -322,6 +350,9 @@ def get_data_detail(code: str):
 
     if code == "D5":
         return get_d5_detail()
+
+    if code == "D6":
+        return get_d6_detail()
 
     return f"""
 📊 *Data {DATA_CATEGORIES[code]}*
