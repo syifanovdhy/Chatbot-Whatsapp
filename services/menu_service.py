@@ -1,86 +1,72 @@
 from constants.states import MAIN_MENU
 from models import UserDB
 
-def handle_main_menu(
-    user: UserDB,
-    message: str
-):
 
+def handle_main_menu(user: UserDB, message: str):
     if user.registration_step != MAIN_MENU:
         return None
-
     return process_menu_choice(message)
 
+
 def get_main_menu():
-    return """
-    📋 *Silakan pilih layanan yang tersedia*
+    return (
+        "📋 *Silakan pilih layanan yang tersedia*\n\n"
+        "1️⃣ Publikasi\n"
+        "2️⃣ Konsultasi Statistik\n"
+        "3️⃣ Data Strategis\n"
+        "4️⃣ Pengaduan\n\n"
+        "Balas dengan angka 1-4.\n\n"
+        "Ketik *Selesai* untuk mengakhiri percakapan."
+    )
 
-    1️⃣ Perpustakaan
-    2️⃣ Konsultasi
-    3️⃣ Silastik
-    4️⃣ Romantik
-    5️⃣ Pengaduan
 
-    Balas dengan angka 1-5.
-    """
+def get_publication_menu():
+    from services.publication_service import get_publication_menu as _get_publication_menu
+    return _get_publication_menu()
+
 
 def process_menu_choice(choice: str):
-    if choice == "0":
+    choice = choice.strip().lower()
+
+    if choice == "0" or choice == "menu":
         return get_main_menu()
 
-    elif choice == "1":
-        return """
-        📚 PERPUSTAKAAN
+    if choice == "1":
+        return get_publication_menu()
 
-        Silakan kunjungi:
+    if choice == "2":
+        return None
 
-        https://bangkepkab.bps.go.id
+    if choice == "3":
+        return (
+            "📊 *Data Strategis Kabupaten Banggai Kepulauan*\n\n"
+            "Fitur Data Strategis akan tersedia pada tahap berikutnya.\n\n"
+            "Ketik *Menu* untuk kembali ke menu awal.\n"
+            "Ketik *Selesai* untuk mengakhiri percakapan."
+        )
 
-        Ketik 0 untuk kembali ke menu utama.
-        """
-    elif choice == "2":
-        return None 
+    if choice == "4":
+        return (
+            "📢 *Layanan Pengaduan*\n\n"
+            "Silakan menyampaikan pengaduan melalui kanal resmi SP4N-LAPOR!:\n"
+            "https://lapor.go.id\n\n"
+            "Ketik *Menu* untuk kembali ke menu awal.\n"
+            "Ketik *Selesai* untuk mengakhiri percakapan."
+        )
 
-    elif choice == "3":
-        return """
-        🛒 SILASTIK
+    return (
+        "Menu tidak tersedia.\n\n"
+        "Ketik *1-4* untuk memilih layanan atau *Menu* untuk kembali ke menu utama."
+    )
 
-        https://silastik.bps.go.id
-
-        Ketik 0 untuk kembali ke menu utama.
-        """
-
-    elif choice == "4":
-        return """
-        📋 ROMANTIK
-
-        https://romantik.web.bps.go.id
-
-        Ketik 0 untuk kembali ke menu utama.
-        """
-
-    elif choice == "5":
-        return """
-        📢 SP4N LAPOR
-
-        https://lapor.go.id
-
-        Ketik 0 untuk kembali ke menu utama.
-        """
-
-    return """
-    Menu tidak tersedia.
-
-    Ketik 0 untuk melihat menu utama.
-    """   
 
 MENU_MAPPING = {
-    "1": "PERPUSTAKAAN",
+    "1": "PUBLIKASI",
     "2": "KONSULTASI",
-    "3": "SILASTIK",
-    "4": "ROMANTIK",
-    "5": "PENGADUAN"
+    "3": "DATA_STRATEGIS",
+    "4": "PENGADUAN",
 }
 
+
 def get_menu_name(choice: str):
-    return MENU_MAPPING.get(choice)
+    return MENU_MAPPING.get(choice.strip())
