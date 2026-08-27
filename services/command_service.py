@@ -22,12 +22,16 @@ def handle_global_command(
     if message == "selesai":
         consultation = get_active_consultation(db=db, user_id=user.id)
         if consultation is None:
-            return "Tidak ada konsultasi aktif."
+            return ("Terima kasih telah menggunakan layanan STATARA. 😊 \n\n"
+                    "Percakapan telah selesai.\n\n"
+                    "Semoga layanan kami dapat membantu kebutuhan data dan informasi Anda.\n\n"
+                    "Ketik *Menu* jika ingin menggunakan layanan STATARA kembali."
+            )
 
         finish_consultation(db=db, consultation=consultation)
         return (
             "Konsultasi telah selesai.\n\n"
-            "Terima kasih telah menggunakan layanan PST.\n\n"
+            "Terima kasih telah menggunakan layanan STATARA.\n\n"
             "Ketik *0* untuk kembali ke menu utama."
         )
 
