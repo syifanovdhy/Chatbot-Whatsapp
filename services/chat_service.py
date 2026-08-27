@@ -6,6 +6,7 @@ from services.whatsapp_user_service import get_or_create_user
 from services.registration_service import handle_registration
 from services.menu_service import handle_main_menu
 from services.consultation_service import handle_consultation
+from constants.states import DATA_MENU
 
 def process_chat(
     db: Session,
@@ -61,6 +62,18 @@ def process_chat(
         from services.publication_service import handle_publication
 
         reply = handle_publication(
+            db=db,
+            user=user,
+            message=message
+        )
+
+        if reply:
+            return reply
+
+    if user.registration_step == DATA_MENU:
+        from services.data_service import handle_data
+
+        reply = handle_data(
             db=db,
             user=user,
             message=message
