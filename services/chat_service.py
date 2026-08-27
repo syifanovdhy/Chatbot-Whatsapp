@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from constants.states import AGENT_MODE
+from constants.states import AGENT_MODE, PUBLICATION_MENU
 from services.agent_service import handle_agent_mode
 from services.command_service import handle_global_command
 from services.whatsapp_user_service import get_or_create_user
@@ -56,6 +56,18 @@ def process_chat(
 
     if reply:
         return reply
+
+    if user.registration_step == PUBLICATION_MENU:
+        from services.publication_service import handle_publication
+
+        reply = handle_publication(
+            db=db,
+            user=user,
+            message=message
+        )
+
+        if reply:
+            return reply
 
     reply = handle_consultation(
         db=db,
