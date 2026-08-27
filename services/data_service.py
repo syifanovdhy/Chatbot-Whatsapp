@@ -145,6 +145,55 @@ Ketik *Selesai* untuk mengakhiri percakapan.
 
     return response
 
+D2_DATA = {
+    "2025": {
+        "garis_kemiskinan": "471.281",
+        "penduduk_miskin": "13,92",
+        "persentase": "11,49",
+    },
+    "2024": {
+        "garis_kemiskinan": "453.552",
+        "penduduk_miskin": "14,86",
+        "persentase": "12,32",
+    },
+    "2023": {
+        "garis_kemiskinan": "432.673",
+        "penduduk_miskin": "15,50",
+        "persentase": "12,90",
+    },
+    "2022": {
+        "garis_kemiskinan": "396.904",
+        "penduduk_miskin": "16,07",
+        "persentase": "13,44",
+    },
+}
+
+def get_d2_detail():
+    response = """
+📊 *Data Kemiskinan Kabupaten Banggai Kepulauan*
+
+"""
+
+    for year, data in D2_DATA.items():
+        response += f"""Tahun {year}
+Jumlah Penduduk Miskin: {data['penduduk_miskin']} ribu orang
+Persentase Penduduk Miskin: {data['persentase']}%
+Garis Kemiskinan: Rp{data['garis_kemiskinan']}/kapita/bulan
+
+"""
+
+    response += """Sumber:
+BPS Kabupaten Banggai Kepulauan
+Susenas Maret
+
+Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
+Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Selesai* untuk mengakhiri percakapan.
+"""
+
+    return response
+
+
 def get_data_menu():
     return """
 📊 *Data Strategis Kabupaten Banggai Kepulauan*
@@ -176,6 +225,9 @@ def get_data_detail(code: str):
 
     if code == "D1":
         return get_d1_detail()
+
+    if code == "D2":
+        return get_d2_detail()
 
     if code == "D3":
         return get_d3_detail()
