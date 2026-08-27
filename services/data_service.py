@@ -232,6 +232,53 @@ Ketik *Selesai* untuk mengakhiri percakapan.
 
     return response
 
+D5_DATA = {
+    "2025": {
+        "tpak": "73,35",
+        "tpt": "1,67",
+    },
+    "2024": {
+        "tpak": "73,48",
+        "tpt": "1,55",
+    },
+    "2023": {
+        "tpak": "72,76",
+        "tpt": "1,56",
+    },
+    "2022": {
+        "tpak": "74,63",
+        "tpt": "1,48",
+    },
+    "2021": {
+        "tpak": "71,98",
+        "tpt": "2,95",
+    },
+    
+}
+
+def get_d5_detail():
+    response = """
+📊 *Data Ketenagakerjaan Kabupaten Banggai Kepulauan*
+
+"""
+
+    for year, data in D5_DATA.items():
+        response += f"""Tahun {year}
+Tingkat Partisipasi Angkatan Kerja (TPAK): {data['tpak']}%
+Tingkat Pengangguran Terbuka (TPT): {data['tpt']}%
+
+"""
+
+    response += """Sumber:
+BPS Kabupaten Banggai Kepulauan
+
+Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
+Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Selesai* untuk mengakhiri percakapan.
+"""
+
+    return response
+
 def get_data_menu():
     return """
 📊 *Data Strategis Kabupaten Banggai Kepulauan*
@@ -272,6 +319,9 @@ def get_data_detail(code: str):
 
     if code == "D4":
         return get_d4_detail()
+
+    if code == "D5":
+        return get_d5_detail()
 
     return f"""
 📊 *Data {DATA_CATEGORIES[code]}*
