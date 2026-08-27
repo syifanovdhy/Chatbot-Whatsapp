@@ -3,10 +3,12 @@ from sqlalchemy.orm import Session
 from constants.states import (
     MAIN_MENU,
     PUBLICATION_MENU,
-    DATA_MENU
+    DATA_MENU,
+    FAQ_MENU
 )
 
 from models import MenuLogDB, UserDB
+from services.faq_service import get_faq_menu, get_faq_answer
 
 
 def get_main_menu():
@@ -19,8 +21,9 @@ Silakan pilih layanan yang tersedia:
 2️⃣ Konsultasi Statistik
 3️⃣ Data Strategis
 4️⃣ Pengaduan
+5️⃣ FAQ
 
-Balas dengan angka 1-4.
+Balas dengan angka 1-5.
 
 Ketik *Menu* atau *0* untuk kembali ke menu utama.
 Ketik *Selesai* untuk mengakhiri percakapan.
@@ -174,6 +177,14 @@ def process_menu_choice(
         db.commit()
 
         return get_complaint_menu()
+    # ==========================================
+    # 5. FAQ
+    # ==========================================
+    elif choice == "5":
+        user.registration_step = FAQ_MENU
+        db.commit()
+
+        return get_faq_menu()
 
     # ==========================================
     # Pilihan tidak tersedia
@@ -187,8 +198,9 @@ Silakan pilih salah satu layanan:
 2️⃣ Konsultasi Statistik
 3️⃣ Data Strategis
 4️⃣ Pengaduan
+5️⃣ FAQ
 
-Balas dengan angka 1-4.
+Balas dengan angka 1-5.
 
 Ketik *Menu* atau *0* untuk kembali ke menu utama.
 """
