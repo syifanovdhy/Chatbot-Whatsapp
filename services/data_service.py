@@ -195,18 +195,38 @@ Ketik *Selesai* untuk mengakhiri percakapan.
 D4_DATA = {
     "2025": {
         "ipm": "68,44",
+        "uhh": "67,38",
+        "hls": "13,12",
+        "rls": "8,88",
+        "ppk": "8.72",
     },
     "2024": {
         "ipm": "67,65",
+        "uhh": "67,54",
+        "hls": "13,11",
+        "rls": "8,70",
+        "ppk": "8.38",
     },
     "2023": {
         "ipm": "67,05",
+        "uhh": "67,35",
+        "hls": "13,09",
+        "rls": "8,62",
+        "ppk": "8.07",
     },
     "2022": {
         "ipm": "66,30",
+        "uhh": "67,19",
+        "hls": "13,08",
+        "rls": "8,46",
+        "ppk": "7.71",
     },
     "2021": {
         "ipm": "65,82",
+        "uhh": "67,03",
+        "hls": "13,07",
+        "rls": "8,44",
+        "ppk": "7.45",
     },
 }
 
@@ -219,6 +239,10 @@ def get_d4_detail():
     for year, data in D4_DATA.items():
         response += f"""Tahun {year}
 IPM: {data['ipm']}
+Umur Harapan Hidup (UHH): {data['uhh']} tahun
+Harapan Lama Sekolah (HLS): {data['hls']} tahun
+Rata-rata Lama Sekolah (RLS): {data['rls']} tahun
+Pengeluaran per Kapita: Rp{data['ppk']} juta
 
 """
 
@@ -364,51 +388,48 @@ Ketik *Menu* untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """
 
-
 def get_data_rincian():
     return """
 📊 *Rincian Data Strategis Kabupaten Banggai Kepulauan*
 
-D1. Kependudukan
+*D1. Kependudukan*
 - Jumlah Penduduk
 - Laju Pertumbuhan Penduduk
 - Kepadatan Penduduk
+- Rasio Jenis Kelamin
 
-D2. Kemiskinan
+*D2. Kemiskinan*
 - Persentase Penduduk Miskin
 - Jumlah Penduduk Miskin
 - Garis Kemiskinan
 
-D3. PDRB
+*D3. PDRB*
 - PDRB Harga Berlaku
 - PDRB Harga Konstan
-- PDRB Per Kapita
 - Pertumbuhan Ekonomi
 
-D4. Indeks Pembangunan Manusia (IPM)
-- IPM
+*D4. Indeks Pembangunan Manusia (IPM)*
+- Indeks Pembangunan Manusia
 - Umur Harapan Hidup
 - Harapan Lama Sekolah
 - Rata-rata Lama Sekolah
 - Pengeluaran per Kapita
 
-D5. Ketenagakerjaan
+*D5. Ketenagakerjaan*
 - Tingkat Pengangguran Terbuka
 - Tingkat Partisipasi Angkatan Kerja
-- Penduduk Bekerja
 
-D6. Geografis
+*D6. Geografis*
 - Luas Wilayah
 - Jumlah Kecamatan
 - Jumlah Desa/Kelurahan
 
-Ketik kode D1-D6 untuk melihat data.
+Ketik kode *D1-D6* untuk melihat data.
 
 Ketik *Data* untuk kembali ke menu Data Strategis.
 Ketik *Menu* untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """
-
 
 def handle_data(
     db: Session,
