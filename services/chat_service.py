@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from constants.states import AGENT_MODE, PUBLICATION_MENU
+from constants.states import AGENT_MODE, FAQ_MENU, PUBLICATION_MENU, DATA_MENU
 from services.agent_service import handle_agent_mode
 from services.command_service import handle_global_command
 from services.whatsapp_user_service import get_or_create_user
@@ -74,6 +74,19 @@ def process_chat(
         from services.data_service import handle_data
 
         reply = handle_data(
+            db=db,
+            user=user,
+            message=message
+        )
+
+        if reply:
+            return reply
+
+    if user.registration_step == FAQ_MENU:
+
+        from services.faq_service import handle_faq
+
+        reply = handle_faq(
             db=db,
             user=user,
             message=message

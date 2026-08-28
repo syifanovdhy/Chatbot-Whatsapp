@@ -8,7 +8,7 @@ from constants.states import (
 )
 
 from models import MenuLogDB, UserDB
-from services.faq_service import get_faq_menu, get_faq_answer
+from services.faq_service import get_faq_menu
 
 
 def get_main_menu():
@@ -97,6 +97,27 @@ Ketik *Menu* atau *0* untuk kembali ke menu utama.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """
 
+def get_faq_menu():
+    return """
+❓ *FAQ STATARA*
+
+Berikut pertanyaan yang sering ditanyakan:
+
+1️⃣ Apa itu STATARA?
+2️⃣ Apa saja layanan yang tersedia?
+3️⃣ Bagaimana cara mendapatkan publikasi BPS?
+4️⃣ Bagaimana cara mendapatkan data statistik?
+5️⃣ Bagaimana cara melakukan konsultasi statistik?
+6️⃣ Apakah konsultasi statistik dikenakan biaya?
+7️⃣ Bagaimana cara menyampaikan pengaduan?
+8️⃣ Bagaimana cara kembali ke menu utama?
+
+Balas dengan angka 1-8.
+
+Ketik *FAQ* untuk menampilkan kembali daftar pertanyaan.
+Ketik *Menu* atau *0* untuk kembali ke menu utama.
+Ketik *Selesai* untuk mengakhiri percakapan.
+"""
 
 def handle_main_menu(
     db: Session,
@@ -210,7 +231,8 @@ MENU_MAPPING = {
     "1": "PUBLIKASI",
     "2": "KONSULTASI",
     "3": "DATA_STRATEGIS",
-    "4": "PENGADUAN"
+    "4": "PENGADUAN", 
+    "5": "FAQ"
 }
 
 

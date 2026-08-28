@@ -95,6 +95,7 @@ Berikut pertanyaan yang sering ditanyakan:
 5️⃣ Bagaimana cara melakukan konsultasi statistik?
 6️⃣ Apakah konsultasi statistik dikenakan biaya?
 7️⃣ Bagaimana cara menyampaikan pengaduan?
+8️⃣ Bagaimana cara kembali ke menu utama?
 
 Balas dengan angka 1-8.
 
@@ -107,10 +108,10 @@ Ketik *Selesai* untuk mengakhiri percakapan.
 def get_faq_detail(choice: str):
     choice = choice.strip()
 
-    faq = FAQ_DATA.get(choice)
-
-    if not faq:
+    if choice not in FAQ_DATA:
         return None
+
+    faq = FAQ_DATA.get(choice)
 
     return f"""
 ❓ *FAQ STATARA*
