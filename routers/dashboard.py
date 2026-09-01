@@ -59,7 +59,7 @@ def finish_dashboard_consultation(
                     "Konsultasi telah selesai.\n\n"
                     "Terima kasih telah menggunakan Pelayanan Statistik Terpadu "
                     "BPS Kabupaten Banggai Kepulauan.\n\n"
-                    "Ketik *0* untuk kembali ke menu utama."
+                    "Ketik *Menu* atau *0* untuk kembali ke menu utama."
                 ),
             )
             notification_sent = True

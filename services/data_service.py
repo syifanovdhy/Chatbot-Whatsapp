@@ -55,10 +55,10 @@ Rasio Jenis Kelamin: {data['rasio_jenis_kelamin']}
 """
 
     response += """Sumber:
-BPS Kabupaten Banggai Kepulauan
+Dinas Kependudukan dan Pencatatan Sipil (Dukcapil) Kabupaten Banggai Kepulauan 
 
 Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
-Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Menu* atau *0* untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """
 
@@ -106,7 +106,7 @@ BPS Kabupaten Banggai Kepulauan
 Susenas Maret
 
 Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
-Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Menu* atau *0* untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """
 
@@ -186,7 +186,7 @@ Untuk data PDRB yang lebih lengkap:
 https://tinyurl.com/bps-bangkep-pdrbl-2021-2025
 
 Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
-Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Menu* atau *0* untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """
 
@@ -250,7 +250,7 @@ Pengeluaran per Kapita: Rp{data['ppk']} juta
 BPS Kabupaten Banggai Kepulauan
 
 Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
-Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Menu* atau *0* untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """
 
@@ -297,7 +297,7 @@ Tingkat Pengangguran Terbuka (TPT): {data['tpt']}%
 BPS Kabupaten Banggai Kepulauan
 
 Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
-Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Menu* atau *0* untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """
 
@@ -321,7 +321,7 @@ Sumber:
 BPS Kabupaten Banggai Kepulauan
 
 Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan.
-Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Menu* atau *0* untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """.format(
         luas=D6_DATA["luas_wilayah"],
@@ -348,7 +348,7 @@ Rincian. Untuk melihat rincian data apa saja yang tersedia di semua kategori di 
 Contoh: Balas dengan *D1* untuk mengetahui data kependudukan.
 
 Ketik *Data* untuk kembali ke menu Data Strategis Kabupaten Banggai Kepulauan
-Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Menu* atau *0* untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """
 
@@ -384,7 +384,7 @@ def get_data_detail(code: str):
 Data untuk kategori {DATA_CATEGORIES[code]} sedang dalam proses pengisian.
 
 Ketik *Data* untuk kembali ke menu Data Strategis.
-Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Menu* atau *0* untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """
 
@@ -427,7 +427,7 @@ def get_data_rincian():
 Ketik kode *D1-D6* untuk melihat data.
 
 Ketik *Data* untuk kembali ke menu Data Strategis.
-Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Menu* atau *0* untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan.
 """
 
@@ -470,5 +470,5 @@ def handle_data(
 Silakan pilih D1-D6 atau ketik *Rincian*.
 
 Ketik *Data* untuk kembali ke menu Data Strategis.
-Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Menu* atau *0* untuk kembali ke menu awal.
 """

@@ -185,11 +185,11 @@ def get_publication_detail(code: str):
     for year, link in publication["links"].items():
         response += f"{year}\n{link}\n\n"
 
-    response += """
-Publikasi Lainnya dapat diakses melalui website bPS Kabupaten Banggai Kepulauan 
+    response += """Publikasi Lainnya dapat diakses melalui website BPS Kabupaten Banggai Kepulauan 
 https://www.bangkepkab.bps.go.id
+
 Ketik *Pub* untuk kembali ke menu Publikasi BPS Kabupaten Banggai Kepulauan
-Ketik *Menu* untuk kembali ke menu awal.
+Ketik *Menu* atau *0*untuk kembali ke menu awal.
 Ketik *Selesai* untuk mengakhiri percakapan."""
 
     return response

@@ -48,7 +48,7 @@ def record_direct_reply(
                 "Konsultasi telah selesai.\n\n"
                 "Terima kasih telah menggunakan Pelayanan Statistik Terpadu "
                 "BPS Kabupaten Banggai Kepulauan.\n\n"
-                "Ketik *0* untuk kembali ke menu utama."
+                "Ketik *Menu* atau *0* untuk kembali ke menu utama."
             ),
         )
         return {"recorded": True, "finished": True, "consultation_id": consultation.id}

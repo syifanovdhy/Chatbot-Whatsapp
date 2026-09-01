@@ -106,5 +106,5 @@ def process_chat(
 
     return (
         "Maaf, saya belum memahami pesan tersebut.\n\n"
-        "Ketik *0* untuk kembali ke menu utama."
+        "Ketik *Menu* atau *0* untuk kembali ke menu utama."
     )

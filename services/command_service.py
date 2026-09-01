@@ -25,14 +25,14 @@ def handle_global_command(
             return ("Terima kasih telah menggunakan layanan STATARA. 😊 \n\n"
                     "Percakapan telah selesai.\n\n"
                     "Semoga layanan kami dapat membantu kebutuhan data dan informasi Anda.\n\n"
-                    "Ketik *Menu* jika ingin menggunakan layanan STATARA kembali."
+                    "Ketik *Menu* atau *0* jika ingin menggunakan layanan STATARA kembali."
             )
 
         finish_consultation(db=db, consultation=consultation)
         return (
             "Konsultasi telah selesai.\n\n"
             "Terima kasih telah menggunakan layanan STATARA.\n\n"
-            "Ketik *0* untuk kembali ke menu utama."
+            "Ketik *Menu* atau *0* untuk kembali ke menu utama."
         )
 
     if message == "batal":
@@ -41,7 +41,7 @@ def handle_global_command(
             db.commit()
             return ("Permintaan konsultasi dibatalkan.\n\n"
                     "Semoga layanan kami dapat membantu kebutuhan data dan informasi Anda.\n\n"
-                    "Ketik *Menu* jika ingin menggunakan layanan STATARA kembali."
+                    "Ketik *Menu* atau *0* jika ingin menggunakan layanan STATARA kembali."
                 )
 
         if user.registration_step == WAITING_AGENT:
