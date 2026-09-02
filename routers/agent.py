@@ -48,6 +48,11 @@ def record_direct_reply(
                 "Konsultasi telah selesai.\n\n"
                 "Terima kasih telah menggunakan Pelayanan Statistik Terpadu "
                 "BPS Kabupaten Banggai Kepulauan.\n\n"
+                "📖 *Buku Tamu* \n\n"
+                "Kami sangat menghargai kesediaan Anda untuk mengisi "
+                "Buku Tamu sebagai bahan evaluasi dan peningkatan layanan. \n\n"
+
+                "👉 [Link Buku Tamu]"
                 "Ketik *Menu* atau *0* untuk kembali ke menu utama."
             ),
         )
